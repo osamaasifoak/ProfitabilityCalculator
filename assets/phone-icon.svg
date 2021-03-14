@@ -1,0 +1,16 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="9.567" height="16.5" viewBox="0 0 9.567 16.5">
+  <g id="phone-4" transform="translate(0.25 0.25)">
+    <g id="Group_4" data-name="Group 4" transform="translate(2.933 1.585)">
+      <g id="Group_3" data-name="Group 3" transform="translate(0)">
+        <path id="Path_1" data-name="Path 1" d="M207.734,25.6h-2.667a.267.267,0,1,0,0,.533h2.667a.267.267,0,1,0,0-.533Z" transform="translate(-204.801 -25.6)" fill="#fc9d27" stroke="#ff9d00" stroke-width="0.5"/>
+      </g>
+    </g>
+    <g id="Group_10" data-name="Group 10" transform="translate(0)">
+      <g id="Group_9" data-name="Group 9">
+        <path id="Path_4" data-name="Path 4" d="M119.036,0H111.9a.965.965,0,0,0-.964.964V15.036A.965.965,0,0,0,111.9,16h7.139a.965.965,0,0,0,.964-.964V.964A.965.965,0,0,0,119.036,0Zm.43,15.036a.431.431,0,0,1-.43.431H111.9a.431.431,0,0,1-.431-.43V.964A.431.431,0,0,1,111.9.533h7.139a.431.431,0,0,1,.431.431V15.036Z" transform="translate(-110.933)" fill="#fc9d27" stroke="#ff9d00" stroke-width="0.5"/>
+      </g>
+    </g>
+    <circle id="Ellipse_1" data-name="Ellipse 1" cx="0.785" cy="0.785" r="0.785" transform="translate(3.874 12.813)" fill="#fc9d27"/>
+  </g>
+</svg>
