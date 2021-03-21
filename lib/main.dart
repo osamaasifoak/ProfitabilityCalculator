@@ -3,6 +3,7 @@ import 'package:lichtline/constants/colors/colors_constants.dart';
 import 'package:lichtline/provider_initialize_list.dart';
 import 'package:lichtline/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:lichtline/screens/pdf/pdf_screen.dart';
 import 'package:lichtline/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: (RouteSettings settings) {
           return onGenerateRoutes(settings);
         },
-        home: SplashScreen(),
+        home: PdfScreen(),
         // home: AnimationScreen(),
         debugShowCheckedModeBanner: false,
       ),
