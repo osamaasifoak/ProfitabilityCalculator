@@ -27,6 +27,9 @@ class UmweltrechnerScreenState extends State<UmweltrechnerScreen> {
         fillColorFn: (Sales sales, _) {
           return charts.MaterialPalette.black;
         },
+        colorFn: (Sales sales, _) {
+          return charts.MaterialPalette.black;
+        },
       ),
       charts.Series<Sales, String>(
         id: dataProvider.companyName,
@@ -34,6 +37,9 @@ class UmweltrechnerScreenState extends State<UmweltrechnerScreen> {
         measureFn: (Sales sales, _) => sales.sales,
         data: data2,
         fillColorFn: (Sales sales, _) {
+          return charts.MaterialPalette.gray.shadeDefault;
+        },
+        colorFn: (Sales sales, _) {
           return charts.MaterialPalette.gray.shadeDefault;
         },
       ),

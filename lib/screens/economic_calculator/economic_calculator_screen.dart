@@ -18,10 +18,8 @@ class EconomicCalculatorScreenState extends State<EconomicCalculatorScreen> {
   List<charts.Series> seriesList;
   DataProvider dataProvider;
   List<charts.Series<Sales, String>> _createRandomData() {
-    final lichtLine =
-        dataProvider.calculateEnergyCosting(dataProvider.lichtLine);
-    final altLousung =
-        dataProvider.calculateEnergyCosting(dataProvider.altLosung);
+    final lichtLine = dataProvider.totalKw(dataProvider.lichtLine);
+    final altLousung = dataProvider.totalKw(dataProvider.altLosung);
     return [
       charts.Series<Sales, String>(
         id: 'lichtline',
@@ -31,6 +29,9 @@ class EconomicCalculatorScreenState extends State<EconomicCalculatorScreen> {
         fillColorFn: (Sales sales, _) {
           return charts.MaterialPalette.black;
         },
+        colorFn: (Sales sales, _) {
+          return charts.MaterialPalette.black;
+        },
       ),
       charts.Series<Sales, String>(
         id: dataProvider.companyName,
@@ -38,6 +39,9 @@ class EconomicCalculatorScreenState extends State<EconomicCalculatorScreen> {
         measureFn: (Sales sales, _) => sales.sales,
         data: altLousung,
         fillColorFn: (Sales sales, _) {
+          return charts.MaterialPalette.gray.shadeDefault;
+        },
+        colorFn: (Sales sales, _) {
           return charts.MaterialPalette.gray.shadeDefault;
         },
       ),
@@ -90,10 +94,10 @@ class EconomicCalculatorScreenState extends State<EconomicCalculatorScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextComponent(
-              text: StringConstant.energiekosten,
+              text: StringConstant.energieverbrauchkum,
               textStyle: FontStyles.inter(
                   color: ColorConstant.black,
-                  fontSize: 30,
+                  fontSize: 25,
                   fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),

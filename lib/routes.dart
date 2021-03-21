@@ -7,6 +7,7 @@ import 'package:lichtline/screens/home/menu_selection_screen.dart';
 import 'package:lichtline/screens/input_readings/company_name_screen.dart';
 import 'package:lichtline/screens/input_readings/input_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:lichtline/screens/pdf/pdf_screen.dart';
 import 'package:lichtline/screens/umweltrechner/umweltrechner.dart';
 import 'package:lichtline/splash_screen.dart';
 import 'constants/routes/routes_constants.dart';
@@ -52,6 +53,10 @@ onGenerateRoutes(RouteSettings settings) {
     case RouteConstants.companyNameScreen:
       return MaterialPageRoute(
         builder: (_) => CompanyNameScreen(),
+      );
+    case RouteConstants.pdfScreen:
+      return MaterialPageRoute(
+        builder: (_) => PdfScreen(),
       );
     default:
   }
