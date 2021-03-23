@@ -7,6 +7,8 @@ import 'package:lichtline/screens/pdf/pdf_screen.dart';
 import 'package:lichtline/splash_screen.dart';
 import 'package:provider/provider.dart';
 
+import 'splash_screen.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: (RouteSettings settings) {
           return onGenerateRoutes(settings);
         },
-        home: PdfScreen(),
+        home: SplashScreen(),
         // home: AnimationScreen(),
         debugShowCheckedModeBanner: false,
       ),
