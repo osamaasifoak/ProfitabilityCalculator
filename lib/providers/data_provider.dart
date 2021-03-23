@@ -45,7 +45,7 @@ class DataProvider extends ChangeNotifier {
         if (i == 1) {
           _totalEnergyCosting.add(
             Sales(
-                _dateTime.year.toString(),
+                i.toString(),
                 double.parse(
                   _tempCalValue.toStringAsFixed(2),
                 )),
@@ -58,7 +58,7 @@ class DataProvider extends ChangeNotifier {
               _newSubtractValue + _totalEnergyCosting[0].sales;
           _totalEnergyCosting.add(
             Sales(
-                (_dateTime.year + i).toString(),
+                i.toString(),
                 double.parse(
                   _newValueForNextYear.toStringAsFixed(2),
                 )),
@@ -111,12 +111,11 @@ class DataProvider extends ChangeNotifier {
           //       )),
           double _cost = _totalCosting[i - 1].sales + _totalEnergy[i].sales;
           double _maintenance = _stuck.toDouble() * _maintenanceP.toDouble();
-          _totalCosting.add(
-              Sales((_dateTime.year + i).toString(), _cost + _maintenance));
+          _totalCosting.add(Sales(i.toString(), _cost + _maintenance));
         } else {
           // _totalCosting.add(_totalCosting[i - 1] + _totalEnergy[i]);
 
-          _totalCosting.add(Sales((_dateTime.year + i).toString(),
+          _totalCosting.add(Sales(i.toString(),
               (_totalCosting[i - 1].sales + _totalEnergy[i].sales)));
         }
       }
@@ -135,7 +134,7 @@ class DataProvider extends ChangeNotifier {
           (_hours * _days * _stuck * (_watt / 10000) * (486 / 100000)) * i;
       _totalCo2.add(
         Sales(
-          (_dateTime.year + i - 1).toString(),
+          (i - 1).toString(),
           tempCal,
         ),
       );
@@ -154,7 +153,7 @@ class DataProvider extends ChangeNotifier {
     List<Sales> _totalKw = [];
     for (int i = 1; i <= _year; i++) {
       double tempCal = (_hours * _days * _stuck * (_watt / 1000)) * i;
-      _totalKw.add(Sales((_dateTime.year + i).toString(), tempCal));
+      _totalKw.add(Sales(i.toString(), tempCal));
     }
     print("KW: " + _totalKw.toString());
     return _totalKw;

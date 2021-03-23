@@ -1,5 +1,6 @@
 class StringConstant {
   static const String energiekosten = "Energiekosten";
+  static const String energieverbrauchkum = "Energieverbrauch kum.";
   static const String co2VerbrouchKum = "CO2-verbrauch kum";
   static const String energieVerbrouchKum = "Energieverbrauch kum";
   static const String lichtLine = "LichtLine";

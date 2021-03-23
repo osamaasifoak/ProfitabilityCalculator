@@ -6,6 +6,7 @@ import 'package:lichtline/constants/colors/colors_constants.dart';
 import 'package:lichtline/constants/strings/string_constants.dart';
 import 'package:lichtline/constants/styles/font_styles_constants.dart';
 import 'package:provider/provider.dart';
+import '../../components/tab_bar_component.dart';
 import '../../providers/data_provider.dart';
 
 class UmweltrechnerScreen extends StatefulWidget {
@@ -27,6 +28,9 @@ class UmweltrechnerScreenState extends State<UmweltrechnerScreen> {
         fillColorFn: (Sales sales, _) {
           return charts.MaterialPalette.black;
         },
+        colorFn: (Sales sales, _) {
+          return charts.MaterialPalette.black;
+        },
       ),
       charts.Series<Sales, String>(
         id: dataProvider.companyName,
@@ -34,6 +38,9 @@ class UmweltrechnerScreenState extends State<UmweltrechnerScreen> {
         measureFn: (Sales sales, _) => sales.sales,
         data: data2,
         fillColorFn: (Sales sales, _) {
+          return charts.MaterialPalette.gray.shadeDefault;
+        },
+        colorFn: (Sales sales, _) {
           return charts.MaterialPalette.gray.shadeDefault;
         },
       ),
@@ -86,33 +93,48 @@ class UmweltrechnerScreenState extends State<UmweltrechnerScreen> {
         color: ColorConstant.black,
       ),
       body: Container(
+        height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextComponent(
-              text: StringConstant.co2VerbrouchKum,
-              textStyle: FontStyles.inter(
-                  color: ColorConstant.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            Expanded(
-              child: barChart(seriesList1),
-            ),
-            TextComponent(
-              text: StringConstant.energieVerbrouchKum,
-              textStyle: FontStyles.inter(
-                  color: ColorConstant.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            Expanded(
-              child: barChart(seriesList2),
-            ),
-          ],
+        child: DefaultTabController(
+          initialIndex: 0,
+          length: 2,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: TabBarViewComponent(
+                  childrenTabs: [
+                    barChart(seriesList1),
+                    barChart(seriesList2),
+                  ],
+                  tabsName: [
+                    StringConstant.co2VerbrouchKum,
+                    StringConstant.energieVerbrouchKum,
+                  ],
+                  horizontalPadding: 15,
+                ),
+              ),
+              // TextComponent(
+              //   text: StringConstant.co2VerbrouchKum,
+              //   textStyle: FontStyles.inter(
+              //       color: ColorConstant.black,
+              //       fontSize: 20,
+              //       fontWeight: FontWeight.bold),
+              //   textAlign: TextAlign.center,
+              // ),
+              // TextComponent(
+              //   text: StringConstant.energieVerbrouchKum,
+              //   textStyle: FontStyles.inter(
+              //       color: ColorConstant.black,
+              //       fontSize: 20,
+              //       fontWeight: FontWeight.bold),
+              //   textAlign: TextAlign.center,
+              // ),
+              // Expanded(
+              //   child: barChart(seriesList2),
+              // ),
+            ],
+          ),
         ),
       ),
     );

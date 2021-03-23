@@ -93,5 +93,8 @@ var btnList = [
     "title": StringConstant.zertifikat,
     "route": RouteConstants.certificateScreen
   },
-  {"title": StringConstant.schlusselfaktoren, "route": ""},
+  {
+    "title": StringConstant.schlusselfaktoren,
+    "route": RouteConstants.pdfScreen
+  },
 ];

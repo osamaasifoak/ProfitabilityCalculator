@@ -27,4 +27,5 @@ class RouteConstants {
   static const String umweltrechnerScreen = 'umweltrechnerScreen';
   static const String certificateScreen = 'certificateScreen';
   static const String companyNameScreen = 'companyNameScreen';
+  static const String pdfScreen = 'pdfScreen';
 }
