@@ -177,6 +177,15 @@ class DataProvider extends ChangeNotifier {
 
     print(totalMaintenanceCost);
   }
+
+  // annualCostSaving(List<InputModel> _valuesForCalculation) {
+  //   int _hours = int.parse(_valuesForCalculation[0].value);
+  //   int _days = int.parse(_valuesForCalculation[1].value);
+  //   int _stuck = int.parse(_valuesForCalculation[2].value);
+  //   int _watt = int.parse(_valuesForCalculation[3].value);
+  //   int _maintenanceP = int.parse(_valuesForCalculation[5].value);
+  //   calculateMaintenanceCost(_maintenanceP.toDouble(), 12, 2);
+  // }
 }
 
 class Sales {
