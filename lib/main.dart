@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: (RouteSettings settings) {
           return onGenerateRoutes(settings);
         },
-        home: PdfScreen(),
+        home: SplashScreen(),
         // home: AnimationScreen(),
         debugShowCheckedModeBanner: false,
       ),
