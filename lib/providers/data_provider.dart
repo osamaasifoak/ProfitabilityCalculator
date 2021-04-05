@@ -128,6 +128,8 @@ class DataProvider extends ChangeNotifier {
     int _days = int.parse(_valuesForCalculation[1].value);
     int _stuck = int.parse(_valuesForCalculation[2].value);
     int _watt = int.parse(_valuesForCalculation[3].value);
+    int _maintenanceP = int.parse(_valuesForCalculation[5].value);
+    calculateMaintenanceCost(_maintenanceP.toDouble(), 12, 2);
     List<Sales> _totalCo2 = [];
     for (int i = 1; i <= _year; i++) {
       double tempCal =
@@ -158,6 +160,32 @@ class DataProvider extends ChangeNotifier {
     print("KW: " + _totalKw.toString());
     return _totalKw;
   }
+
+  calculateMaintenanceCost(double maintenanceCost, int totalYears,
+      double maintenanceIncrementYearCycle) {
+    int tempIncrement = 0;
+    List<double> totalMaintenanceCost = [];
+    for (int i = 0; i < 12; i++) {
+      if (tempIncrement == maintenanceIncrementYearCycle) {
+        totalMaintenanceCost.add(maintenanceCost);
+        tempIncrement = 0;
+      } else {
+        tempIncrement++;
+        totalMaintenanceCost.add(null);
+      }
+    }
+
+    print(totalMaintenanceCost);
+  }
+
+  // annualCostSaving(List<InputModel> _valuesForCalculation) {
+  //   int _hours = int.parse(_valuesForCalculation[0].value);
+  //   int _days = int.parse(_valuesForCalculation[1].value);
+  //   int _stuck = int.parse(_valuesForCalculation[2].value);
+  //   int _watt = int.parse(_valuesForCalculation[3].value);
+  //   int _maintenanceP = int.parse(_valuesForCalculation[5].value);
+  //   calculateMaintenanceCost(_maintenanceP.toDouble(), 12, 2);
+  // }
 }
 
 class Sales {
