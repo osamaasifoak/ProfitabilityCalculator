@@ -143,7 +143,7 @@ class _PdfScreenState extends State<PdfScreen> {
                   height: 40,
                 ),
                 pw.Row(
-                  crossAxisAlignment: pw.CrossAxisAlignment.center,
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
                   mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                   children: [
                     pw.SizedBox(

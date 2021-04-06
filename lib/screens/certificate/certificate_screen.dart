@@ -74,7 +74,7 @@ class CertificateScreenState extends State<CertificateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SimpleAppBarComponent(
-        title: "Zertifikat",
+        title: "Schlusselfaktoren",
         titleStyle: FontStyles.inter(
             color: ColorConstant.white,
             fontSize: 18,

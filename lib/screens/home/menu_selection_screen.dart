@@ -89,12 +89,9 @@ var btnList = [
     "title": StringConstant.wirtschaftlichkeitsrechner,
     "route": RouteConstants.economicCalculator,
   },
-  {
-    "title": StringConstant.zertifikat,
-    "route": RouteConstants.certificateScreen
-  },
+  {"title": StringConstant.zertifikat, "route": RouteConstants.pdfScreen},
   {
     "title": StringConstant.schlusselfaktoren,
-    "route": RouteConstants.pdfScreen
+    "route": RouteConstants.certificateScreen
   },
 ];
