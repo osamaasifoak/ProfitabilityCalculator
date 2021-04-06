@@ -3,7 +3,7 @@ class StringConstant {
   static const String energieverbrauchkum = "Energieverbrauch kum.";
   static const String co2VerbrouchKum = "CO2-verbrauch kum";
   static const String energieVerbrouchKum = "Energieverbrauch kum";
-  static const String lichtLine = "LichtLine";
+  static const String lichtLine = "lichtline";
   static const String altLosung = "Alt-Losung";
   static const String onboarding_title_1 = "Auction any items";
   static const String onboarding_title_2 = "From Properties";
@@ -17,22 +17,22 @@ class StringConstant {
   static const String login = "Login";
   static const String signup = "Sign Up";
   static const String umweltrechner = "Umweltrechner";
-  static const String wirtschaftlichkeitsrechner = "Wirtschaftlichkeitsrechner";
+  static const String wirtschaftlichkeitsrechner = "Effizienzrechner";
   static const String zertifikat = "Zertifikat";
-  static const String schlusselfaktoren = "Schlüsselfaktoren";
-  static const String password = "Password";
+  static const String schlusselfaktoren = "Key Facts";
+  static const String password = "Passwort ";
   static const String confirmPassword = "Confirm password";
   static const String or = "Or";
   static const String useOTP = "Use OTP";
-  static const String continueText = "Continue";
+  static const String continueText = "Fortsetzen";
   static const String cart = "Cart";
   static const String gettingStarted = "Get Started";
   static const String profile = "Profile";
   static const String fullName = "Full Name";
   static const String email = "Email";
   static const String name = "name";
-  static const String username = "username";
-  static const String companyName = "Company Name";
+  static const String username = "Benutzername";
+  static const String companyName = "Name der Firma";
   static const String phoneNumber = "Phone Number";
   static const String otpVerification = "OTP Verification";
   static const String verifyOtpToCreateAnAccount =
@@ -128,5 +128,5 @@ class StringConstant {
   static const String acceptedBids = "Accepted Bids";
   static const String uploadReceiptImage = "Upload Receipt Image";
   static const String companyNameScreenText =
-      "With the profitability calulator you can plan your lighting systems quickly, safely and creatively. If you're interested in our economic calculator please do not hesitate to contact us!";
+      "-	Mit unserem Wirtschaftlichkeitsrechner können Sie einfach, schnell und unkompliziert Ihre neue Beleuchtungslösung berechnen. Wir stehen Ihnen für Fragen jederzeit zur Verfügung!";
 }
