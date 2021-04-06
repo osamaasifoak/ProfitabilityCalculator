@@ -25,78 +25,200 @@ class _PdfScreenState extends State<PdfScreen> {
   //   super.initState();
   // }
 
-  writeOnPdf() {
+  writeOnPdf(BuildContext _context) {
     pdf.addPage(pw.MultiPage(
       pageFormat: PdfPageFormat.a4,
-      margin: pw.EdgeInsets.all(32),
+      margin: pw.EdgeInsets.only(left: 32, right: 32),
       build: (pw.Context context) {
         return <pw.Widget>[
-          // pw.Column(
-          //   children: [
-          //     C
-          //   ],
-          // ),
-          // pw.Column(
-          //   crossAxisAlignment: pw.CrossAxisAlignment.center,
-          //   children: [
-          //     pw.Row(
-          //       mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-          //       children: [
-          //         pw.Transform.translate(
-          //           offset: PdfPoints(-80, -50),
-          //           child: pw.Container(
-          //             height: 200,
-          //             width: 200,
-          //             decoration: new pw.BoxDecoration(
-          //                 shape: pw.BoxShape.circle, color: PdfColors.green),
-          //           ),
-          //         ),
-          //         pw.Transform.translate(
-          //           offset: Offset(-50, 0),
-          //           child: pw.Column(
-          //             children: [
-          //               pw.Text(
-          //                 "UMWELT",
-          //                 style: pw.TextStyle(
-          //                     fontSize: 25,
-          //                     color: PdfColors.black,
-          //                     fontWeight: ),
-          //               ),
-          //               TextComponent(
-          //                 text: "ZERTIFIKAT",
-          //                 textStyle: FontStyles.inter(
-          //                     fontSize: 25,
-          //                     color: ColorConstant.greyishBrownTwo,
-          //                     fontWeight: FontWeight.bold),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //         SizedBox()
-          //       ],
-          //     )
-          //   ],
-          // ),
-          // pw.Header(level: 0, child: pw.Text("UMWELT\nZERTIFIKAT")),
-          // pw.Paragraph(
-          //     text:
-          //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."),
-          // pw.Paragraph(
-          //     text:
-          //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."),
-          // pw.Header(level: 1, child: pw.Text("Second Heading")),
-          // pw.Paragraph(
-          //     text:
-          //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."),
-          // pw.Paragraph(
-          //     text:
-          //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."),
-          // pw.Paragraph(
-          //     text:
-          //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."),
+          pw.Container(
+            height: MediaQuery.of(_context).size.height,
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.center,
+              mainAxisAlignment: pw.MainAxisAlignment.center,
+              children: [
+                pw.Container(
+                  height: 200,
+                  width: 200,
+                  decoration: new pw.BoxDecoration(
+                    shape: pw.BoxShape.circle,
+                    color: PdfColors.green,
+                    // boxShadow: [
+                    //   pw.BoxShadow(color: PdfColors.black., blurRadius: 2)
+                    // ],
+                  ),
+                  child: pw.Column(
+                    crossAxisAlignment: pw.CrossAxisAlignment.center,
+                    mainAxisAlignment: pw.MainAxisAlignment.center,
+                    children: [
+                      pw.Text(
+                        "UMWELT",
+                        style: pw.TextStyle(
+                            fontSize: 25,
+                            color: PdfColors.white,
+                            fontWeight: pw.FontWeight.bold),
+                      ),
+                      pw.Text(
+                        "ZERTIFIKAT",
+                        style: pw.TextStyle(
+                            fontSize: 25,
+                            color: PdfColors.white,
+                            fontWeight: pw.FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                pw.SizedBox(
+                  height: 20,
+                ),
+                pw.Text(
+                  "Die Firma lichtline bestätigt der",
+                  style: pw.TextStyle(
+                      fontSize: 20,
+                      color: PdfColors.black,
+                      fontWeight: pw.FontWeight.bold),
+                ),
+                pw.SizedBox(
+                  height: 20,
+                ),
+                pw.Text(
+                  "Rehau AG + Co",
+                  style: pw.TextStyle(
+                      fontSize: 45,
+                      color: PdfColors.black,
+                      fontWeight: pw.FontWeight.bold),
+                ),
+                pw.SizedBox(
+                  height: 20,
+                ),
+                pw.Text(
+                  "durch die Umrüstung auf lichtline-Beleuchtung überden gesamten Nutzungszeitraum folgende Einsparungen:",
+                  textAlign: pw.TextAlign.center,
+                  style: pw.TextStyle(
+                      fontSize: 18,
+                      color: PdfColors.black,
+                      fontWeight: pw.FontWeight.bold),
+                ),
+                pw.SizedBox(
+                  height: 20,
+                ),
+                _rowTitleAndText("0,00 t", "CO2-Äquivalente"),
+                _rowTitleAndText("268,37 kg", "Schwefeldioxid-Äquivalente"),
+                _rowTitleAndText("488,82 kg", "Stickstoffdioxid-Äquivalente"),
+                _rowTitleAndText("220,45 kg", "Kohlenmonoxid-Äquivalente"),
+                pw.SizedBox(
+                  height: 20,
+                ),
+                pw.Text(
+                  "Die dabei jährlich eingesparten Treibhausemissionen entsprechen der Menge, die",
+                  textAlign: pw.TextAlign.center,
+                  style: pw.TextStyle(
+                      fontSize: 18,
+                      color: PdfColors.black,
+                      fontWeight: pw.FontWeight.bold),
+                ),
+                pw.SizedBox(
+                  height: 20,
+                ),
+                pw.Text(
+                  "5.612 Bäume",
+                  textAlign: pw.TextAlign.left,
+                  style: pw.TextStyle(
+                      fontSize: 18,
+                      color: PdfColors.black,
+                      fontWeight: pw.FontWeight.bold),
+                ),
+                pw.SizedBox(
+                  height: 20,
+                ),
+                pw.Text(
+                  "pro Jahr binden können.",
+                  textAlign: pw.TextAlign.center,
+                  style: pw.TextStyle(
+                      fontSize: 18,
+                      color: PdfColors.black,
+                      fontWeight: pw.FontWeight.bold),
+                ),
+                pw.SizedBox(
+                  height: 40,
+                ),
+                pw.Row(
+                  crossAxisAlignment: pw.CrossAxisAlignment.center,
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                  children: [
+                    pw.SizedBox(
+                      width: 150,
+                      child: pw.Center(
+                        child: pw.Text(
+                          "Bayreuth, den 16.10.2020",
+                          textAlign: pw.TextAlign.center,
+                          style: pw.TextStyle(
+                              fontSize: 18,
+                              color: PdfColors.black,
+                              fontWeight: pw.FontWeight.normal),
+                        ),
+                      ),
+                    ),
+                    pw.SizedBox(width: 10, height: 30),
+                    pw.Container(
+                      width: 120,
+                      decoration: new pw.BoxDecoration(
+                        border: pw.Border(
+                          top: pw.BorderSide(width: 1, color: PdfColors.black),
+                        ),
+                      ),
+                      child: pw.Text(
+                        "Maik Weber\n(Geschäftsführer lichtline)",
+                        textAlign: pw.TextAlign.left,
+                        style: pw.TextStyle(
+                            fontSize: 18,
+                            color: PdfColors.black,
+                            fontWeight: pw.FontWeight.bold),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
         ];
       },
     ));
+  }
+
+  pw.Row _rowTitleAndText(String value, String text) {
+    return pw.Row(
+      crossAxisAlignment: pw.CrossAxisAlignment.center,
+      mainAxisAlignment: pw.MainAxisAlignment.center,
+      children: [
+        pw.SizedBox(
+          width: 100,
+          child: pw.Center(
+            child: pw.Text(
+              value,
+              textAlign: pw.TextAlign.center,
+              style: pw.TextStyle(
+                  fontSize: 18,
+                  color: PdfColors.black,
+                  fontWeight: pw.FontWeight.normal),
+            ),
+          ),
+        ),
+        pw.SizedBox(width: 10, height: 30),
+        // pw.SizedBox(
+        //   width: 160,
+        //   child:
+        pw.Text(
+          text,
+          textAlign: pw.TextAlign.left,
+          style: pw.TextStyle(
+              fontSize: 18,
+              color: PdfColors.black,
+              fontWeight: pw.FontWeight.bold),
+        ),
+        // )
+      ],
+    );
   }
 
   Future savePdf() async {
@@ -187,7 +309,7 @@ class _PdfScreenState extends State<PdfScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          writeOnPdf();
+          writeOnPdf(context);
           await savePdf();
 
           Directory documentDirectory =
