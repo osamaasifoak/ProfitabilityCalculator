@@ -27,22 +27,37 @@ class _InputScreenState extends State<InputScreen> {
     _lichtLine.addAll(
       [
         InputModel(
-            fieldName: "Hours", value: "12", isRequired: true, isNum: true),
+            fieldName: "Betriebsdauer pro Tag",
+            value: "12",
+            isRequired: true,
+            isNum: true),
         InputModel(
-            fieldName: "Days", value: "365", isRequired: true, isNum: true),
+            fieldName: "Betriebstage pro Jahr",
+            value: "365",
+            isRequired: true,
+            isNum: true),
         InputModel(
-            fieldName: "Stuck", value: "10", isRequired: true, isNum: true),
+            fieldName: "Anzahl Leuchtmittel",
+            value: "10",
+            isRequired: true,
+            isNum: true),
         InputModel(
-            fieldName: "Watt", value: "60", isRequired: true, isNum: true),
+            fieldName: "Systemleistung in Watt",
+            value: "60",
+            isRequired: true,
+            isNum: true),
         InputModel(
-            fieldName: "Price", value: "200", isRequired: true, isNum: true),
+            fieldName: "Preis pro Leuchtmittel",
+            value: "200",
+            isRequired: true,
+            isNum: true),
         InputModel(
-            fieldName: "Maintenance P",
+            fieldName: "Ersatzkosten pro Leuchtmittel",
             value: "0",
             isRequired: true,
             isNum: true),
         InputModel(
-            fieldName: "Total hours",
+            fieldName: "Lebensdauer pro Leuchtmittel",
             value: "50000",
             isRequired: true,
             isNum: true),
@@ -51,22 +66,37 @@ class _InputScreenState extends State<InputScreen> {
     _altLosung.addAll(
       [
         InputModel(
-            fieldName: "Hours", value: "12", isRequired: true, isNum: true),
+            fieldName: "Betriebsdauer pro Tag",
+            value: "12",
+            isRequired: true,
+            isNum: true),
         InputModel(
-            fieldName: "Days", value: "365", isRequired: true, isNum: true),
+            fieldName: "Betriebstage pro Jahr",
+            value: "365",
+            isRequired: true,
+            isNum: true),
         InputModel(
-            fieldName: "Stuck", value: "10", isRequired: true, isNum: true),
+            fieldName: "Anzahl Leuchtmittel",
+            value: "10",
+            isRequired: true,
+            isNum: true),
         InputModel(
-            fieldName: "Watt", value: "80", isRequired: true, isNum: true),
+            fieldName: "Systemleistung in Watt",
+            value: "80",
+            isRequired: true,
+            isNum: true),
         InputModel(
-            fieldName: "Price", value: "0", isRequired: true, isNum: true),
+            fieldName: "Preis pro Leuchtmittel",
+            value: "0",
+            isRequired: true,
+            isNum: true),
         InputModel(
-            fieldName: "Maintenance P",
+            fieldName: "Ersatzkosten pro Leuchtmittel",
             value: "5",
             isRequired: true,
             isNum: true),
         InputModel(
-            fieldName: "Total hours",
+            fieldName: "Lebensdauer pro Leuchtmittel",
             value: "10000",
             isRequired: true,
             isNum: true),
