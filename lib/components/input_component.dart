@@ -75,6 +75,16 @@ class TextInputComponent extends StatelessWidget {
           hintStyle: FontStyles.inter(color: ColorConstant.greyishBrownTwo),
           border: InputBorder.none,
           errorStyle: FontStyles.inter(color: ColorConstant.red),
+          disabledBorder: new OutlineInputBorder(
+            borderRadius: new BorderRadius.circular(5.0),
+            borderSide: new BorderSide(
+              color: ColorConstant.brownGrey,
+            ),
+          ),
+          errorBorder: new OutlineInputBorder(
+            borderRadius: new BorderRadius.circular(5.0),
+            borderSide: new BorderSide(color: ColorConstant.brownGrey),
+          ),
           enabledBorder: isEnableBorder
               ? new OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(5.0),

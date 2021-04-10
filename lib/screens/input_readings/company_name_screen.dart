@@ -104,6 +104,23 @@ class _CompanyNameScreenState extends State<CompanyNameScreen> {
                       fontSize: 16.0),
                 ),
                 SizedBox(
+                  height: 24,
+                ),
+                ButtonComponent(
+                  onPressed: () => {
+                    Navigator.pushNamed(
+                        context, RouteConstants.sensorVisualizationScreen),
+                  },
+                  buttonText: StringConstant.sensorVisualization,
+                  color: ColorConstant.black,
+                  border: 5,
+                  textStyle: FontStyles.inter(
+                      color: ColorConstant.white,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.3,
+                      fontSize: 16.0),
+                ),
+                SizedBox(
                   height: 16,
                 ),
               ],

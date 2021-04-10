@@ -33,6 +33,9 @@ dependencies:
   pdf: ^2.1.0
   path_provider: ^1.6.28
   flutter_full_pdf_viewer: ^1.0.6
+  firebase_database: ^4.4.0
+  firebase_storage: ^5.2.0
+  firebase_core: ^0.5.3
   # file_picker: ^2.1.6
 
 dev_dependencies:
