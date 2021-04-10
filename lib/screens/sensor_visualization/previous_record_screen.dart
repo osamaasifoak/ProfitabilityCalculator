@@ -86,9 +86,9 @@ class _PreviousRecordScreenState extends State<PreviousRecordScreen> {
                         itemBuilder: (context, index) {
                           return Row(
                             children: [
-                              TextComponent(
-                                text: _data[index],
-                              )
+                              // TextComponent(
+                              //   text: _data[index],
+                              // )
                             ],
                           );
                         });
