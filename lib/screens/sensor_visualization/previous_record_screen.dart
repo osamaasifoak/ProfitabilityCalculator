@@ -35,7 +35,7 @@ class _PreviousRecordScreenState extends State<PreviousRecordScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 30, left: 60, right: 60),
+              padding: const EdgeInsets.only(top: 30, left: 80, right: 80),
               child: ButtonComponent(
                 onPressed: () async {
                   showMonthPicker(
@@ -52,7 +52,7 @@ class _PreviousRecordScreenState extends State<PreviousRecordScreen> {
                     }
                   });
                 },
-                buttonText: "Select year and month",
+                buttonText: "Select Month",
                 color: ColorConstant.black,
                 border: 5,
                 textStyle: FontStyles.inter(
@@ -65,9 +65,95 @@ class _PreviousRecordScreenState extends State<PreviousRecordScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(Icons.calendar_today),
-                Icon(Icons.sensor_door),
-                Icon(Icons.merge_type),
+                SizedBox(
+                  width: 05,
+                ),
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: Icon(
+                      Icons.date_range,
+                      size: 50,
+                    )),
+                Flexible(
+                  child: SizedBox(
+                    width: 30,
+                  ),
+                ),
+                Align(
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.timelapse_sharp,
+                      size: 50,
+                    )),
+                Flexible(
+                  child: SizedBox(
+                    width: 30,
+                  ),
+                ),
+                Align(
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.sensor_door,
+                      size: 50,
+                    )),
+                Flexible(
+                  child: SizedBox(
+                    width: 30,
+                  ),
+                ),
+                Align(
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.merge_type,
+                      size: 50,
+                    )),
+                // Flexible(
+                //   child: SizedBox(
+                //     width: 30,
+                //   ),
+                // ),
+                // Align(
+                //     alignment: Alignment.centerRight,
+                //     child: Icon(
+                //       Icons.score,
+                //       size: 50,
+                //     )),
+              ],
+
+              // children: [
+              //   Icon(Icons.calendar_today),
+              //   Icon(Icons.sensor_door),
+              //   Icon(Icons.merge_type),
+              // ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SizedBox(
+                  width: 10,
+                ),
+                Text('Date'),
+                Flexible(
+                  child: SizedBox(
+                    width: 30,
+                  ),
+                ),
+                Text('Minutes'),
+                Flexible(
+                  child: SizedBox(
+                    width: 40,
+                  ),
+                ),
+                Text('Pace'),
+                Flexible(
+                  child: SizedBox(
+                    width: 45,
+                  ),
+                ),
+                Text('Score'),
               ],
             ),
             Expanded(

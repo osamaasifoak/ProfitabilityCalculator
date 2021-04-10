@@ -29,13 +29,13 @@ class StringConstant {
   static const String useOTP = "Use OTP";
   static const String continueText = "Continue";
   static const String sensorVisualization = "Sensor Visualization";
-=======
-  static const String schlusselfaktoren = "Key Facts";
-  static const String password = "Passwort ";
-  static const String confirmPassword = "Confirm password";
-  static const String or = "Or";
-  static const String useOTP = "Use OTP";
-  static const String continueText = "Fortsetzen";
+
+  // static const String schlusselfaktoren = "Key Facts";
+  // static const String password = "Passwort ";
+  // static const String confirmPassword = "Confirm password";
+  // static const String or = "Or";
+  // static const String useOTP = "Use OTP";
+  // static const String continueText = "Fortsetzen";
 
   static const String cart = "Cart";
   static const String gettingStarted = "Get Started";
