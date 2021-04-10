@@ -27,6 +27,28 @@ class DatePickerUitls {
     ).then(onValue);
   }
 
+  static Future<Null> selectDateAndMonth(
+      BuildContext context, Function(DateTime) onValue) async {
+    showDatePicker(
+      context: context,
+      firstDate: DateTime(DateTime.now().year, DateTime.now().month),
+      lastDate: DateTime(DateTime.now().year, 12),
+      initialDate: DateTime.now(),
+      locale: Locale("en"),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: ColorConstant.black,
+            accentColor: ColorConstant.black,
+            colorScheme: ColorScheme.light(primary: ColorConstant.black),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child,
+        );
+      },
+    ).then(onValue);
+  }
+
   static Future<Null> selectTime(
       BuildContext context, Function(TimeOfDay) onValue) async {
     showTimePicker(

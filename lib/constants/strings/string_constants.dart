@@ -22,6 +22,7 @@ class StringConstant {
   static const String schlusselfaktoren = "Schlüsselfaktoren";
   static const String password = "Password";
   static const String sensorValues = "Sensor values";
+  static const String sensorType = "Sensor type";
   static const String confirmPassword = "Confirm password";
   static const String or = "Or";
   static const String useOTP = "Use OTP";

@@ -3,6 +3,8 @@ import 'package:flutter/gestures.dart';
 import 'package:lichtline/components/app_logo_component.dart';
 import 'package:lichtline/components/buttons/button_component.dart';
 import 'package:lichtline/components/input_component.dart';
+import 'package:lichtline/components/popup_loader_component.dart';
+import 'package:lichtline/components/snack_bar_component.dart';
 import 'package:lichtline/components/text_component.dart';
 import 'package:lichtline/constants/colors/colors_constants.dart';
 import 'package:lichtline/constants/routes/routes_constants.dart';
@@ -24,15 +26,16 @@ class _SensorVisualizationScreenState extends State<SensorVisualizationScreen>
   DateTime _selectedDateTime;
   TextEditingController _dateTimeTextEditingConrtroller;
   TextEditingController _sensorVlauesTextEditingConrtroller;
-  TextEditingController _phoneNumberTextEditingConrtroller;
+  TextEditingController _sensorTypeTextEditingConrtroller;
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final databaseReference = FirebaseDatabase.instance.reference();
   @override
   void initState() {
     super.initState();
     _dateTimeTextEditingConrtroller = new TextEditingController();
     _sensorVlauesTextEditingConrtroller = new TextEditingController();
-    _phoneNumberTextEditingConrtroller = new TextEditingController();
+    _sensorTypeTextEditingConrtroller = new TextEditingController();
   }
 
   @override
@@ -40,13 +43,14 @@ class _SensorVisualizationScreenState extends State<SensorVisualizationScreen>
     super.dispose();
     _dateTimeTextEditingConrtroller.dispose();
     _sensorVlauesTextEditingConrtroller.dispose();
-    _phoneNumberTextEditingConrtroller.dispose();
+    _sensorTypeTextEditingConrtroller.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
+      key: _scaffoldKey,
       body: SingleChildScrollView(
         child: Container(
           width: SizeConfig.screenWidth,
@@ -153,25 +157,66 @@ class _SensorVisualizationScreenState extends State<SensorVisualizationScreen>
                     filled: true,
                   ),
                   SizedBox(
+                    height: 10,
+                  ),
+                  TextInputComponent(
+                    title: StringConstant.sensorType,
+                    controller: _sensorTypeTextEditingConrtroller,
+                    fillColor: ColorConstant.white,
+                    keyboardType: TextInputType.number,
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      child: Icon(
+                        Icons.merge_type,
+                        color: ColorConstant.black,
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == "") {
+                        return "Select ${StringConstant.sensorType}";
+                      }
+                      return null;
+                    },
+                    filled: true,
+                  ),
+                  SizedBox(
                     height: 24,
                   ),
                   ButtonComponent(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState.validate()) {
-                        databaseReference
-                            .child("HnHUcA6MT7WxdAz3pFCQWqkwOWj1")
-                            .child(_selectedDateTime.year.toString())
-                            .child(_selectedDateTime.month.toString())
-                            .child(_selectedDateTime.day.toString())
-                            .set({
-                          "date_time": _selectedDateTime.toString(),
-                          "sensor_values":
-                              _sensorVlauesTextEditingConrtroller.text,
-                          "sensor_type": "test"
-                        });
+                        PopupLoader.showLoadingDialog(context);
+                        try {
+                          await databaseReference
+                              .child("HnHUcA6MT7WxdAz3pFCQWqkwOWj1")
+                              .child(_selectedDateTime.year.toString())
+                              .child(_selectedDateTime.month.toString())
+                              .child(_selectedDateTime.day.toString())
+                              .set({
+                            "date_time": _selectedDateTime.toString(),
+                            "sensor_values":
+                                _sensorVlauesTextEditingConrtroller.text,
+                            "sensor_type":
+                                _sensorTypeTextEditingConrtroller.text
+                          });
+                          setState(() {
+                            _dateTimeTextEditingConrtroller.text = "";
+                            _sensorVlauesTextEditingConrtroller.text = "";
+                            _sensorTypeTextEditingConrtroller.text = "";
+                          });
+                          PopupLoader.hideLoadingDialog(context);
+                          SnackbarComponent.snackbar(
+                              "Sensor visualization successfully submitted",
+                              _scaffoldKey);
+                        }
 
                         // Navigator.pushNamed(
                         //     context, RouteConstants.companyNameScreen),
+                        catch (_) {
+                          PopupLoader.hideLoadingDialog(context);
+                          SnackbarComponent.snackbar(
+                              "Something went wrong", _scaffoldKey);
+                        }
                       }
                     },
                     buttonText: StringConstant.submit,
@@ -191,6 +236,12 @@ class _SensorVisualizationScreenState extends State<SensorVisualizationScreen>
             ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, RouteConstants.previousRecordScreen);
+        },
+        child: Icon(Icons.access_time),
       ),
     );
   }
