@@ -44,7 +44,7 @@ class _PreviousRecordScreenState extends State<PreviousRecordScreen> {
                 onPressed: () async {
                   showMonthPicker(
                     context: context,
-                    firstDate: DateTime(DateTime.now().year, 1),
+                    firstDate: DateTime(DateTime.now().year - 1, 1),
                     lastDate: DateTime(DateTime.now().year, 12),
                     initialDate: _selectedDateTime,
                   ).then((date) {
@@ -94,7 +94,9 @@ class _PreviousRecordScreenState extends State<PreviousRecordScreen> {
                               children: [
                                 Visibility(
                                   visible: index == 0,
-                                  child: Icon(Icons.calendar_today),
+                                  child: _iconWithTextColumn(
+                                      Icons.calendar_today,
+                                      StringConstant.dateAndTime),
                                 ),
                                 TextComponent(
                                   text: DateFormatter.getDateAndTime(
@@ -109,7 +111,8 @@ class _PreviousRecordScreenState extends State<PreviousRecordScreen> {
                                   children: [
                                     Visibility(
                                       visible: index == 0,
-                                      child: Icon(Icons.sensor_door),
+                                      child: _iconWithTextColumn(
+                                          Icons.sensor_door, "Sensor values"),
                                     ),
                                     TextComponent(
                                       text: _data["sensor_values"],
@@ -125,7 +128,8 @@ class _PreviousRecordScreenState extends State<PreviousRecordScreen> {
                                   children: [
                                     Visibility(
                                       visible: index == 0,
-                                      child: Icon(Icons.merge_type),
+                                      child: _iconWithTextColumn(
+                                          Icons.merge_type, "Sensor type"),
                                     ),
                                     TextComponent(
                                       text: _data["sensor_type"],
@@ -149,6 +153,27 @@ class _PreviousRecordScreenState extends State<PreviousRecordScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Column _iconWithTextColumn(IconData icon, String text) {
+    return Column(
+      children: [
+        Icon(
+          icon,
+          size: 30,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5),
+          child: TextComponent(
+            text: text,
+            textStyle: FontStyles.inter(
+                color: ColorConstant.greyishBrownTwo,
+                fontWeight: FontWeight.w500,
+                fontSize: 14),
+          ),
+        ),
+      ],
     );
   }
 }
