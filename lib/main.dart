@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: ColorConstant.kPrimaryColor,
           primaryColor: ColorConstant.kPrimaryColor,
+          dialogTheme: DialogTheme(backgroundColor: ColorConstant.black),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         onGenerateRoute: (RouteSettings settings) {
