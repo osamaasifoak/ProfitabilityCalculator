@@ -1,4 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:lichtline/components/buttons/button_component.dart';
 import 'package:lichtline/components/text_component.dart';
@@ -6,8 +7,10 @@ import 'package:lichtline/constants/colors/colors_constants.dart';
 import 'package:lichtline/constants/strings/string_constants.dart';
 import 'package:lichtline/constants/styles/font_styles_constants.dart';
 import 'package:lichtline/ui_utils/size_config.dart';
+import 'package:lichtline/utils/date_formatter_utils.dart';
 import 'package:lichtline/utils/date_picker_utils.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
+import 'package:intl/intl.dart';
 
 class PreviousRecordScreen extends StatefulWidget {
   @override
@@ -35,7 +38,8 @@ class _PreviousRecordScreenState extends State<PreviousRecordScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 30, left: 60, right: 60),
+              padding: const EdgeInsets.only(
+                  top: 60, left: 60, right: 60, bottom: 20),
               child: ButtonComponent(
                 onPressed: () async {
                   showMonthPicker(
@@ -52,7 +56,8 @@ class _PreviousRecordScreenState extends State<PreviousRecordScreen> {
                     }
                   });
                 },
-                buttonText: "Select year and month",
+                buttonText: DateFormat('yyyy, MMM').format(_selectedDateTime),
+                // "year ${_selectedDateTime.year}, ${_selectedDateTime.month}",
                 color: ColorConstant.black,
                 border: 5,
                 textStyle: FontStyles.inter(
@@ -62,40 +67,83 @@ class _PreviousRecordScreenState extends State<PreviousRecordScreen> {
                     fontSize: 16.0),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Icon(Icons.calendar_today),
-                Icon(Icons.sensor_door),
-                Icon(Icons.merge_type),
-              ],
-            ),
-            Expanded(
-              child: FutureBuilder(
-                future: databaseReference
-                    .child("HnHUcA6MT7WxdAz3pFCQWqkwOWj1")
-                    .child(_selectedDateTime.year.toString())
-                    .child(_selectedDateTime.month.toString())
-                    .once(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData && !snapshot.hasError) {
-                    Map<dynamic, dynamic> _data = snapshot.data.value;
-                    print(_data.values);
-                    return ListView.builder(
-                        itemCount: _data.length,
-                        itemBuilder: (context, index) {
-                          return Row(
-                            children: [
-                              // TextComponent(
-                              //   text: _data[index],
-                              // )
-                            ],
-                          );
-                        });
-                  } else {
-                    return CircularProgressIndicator();
-                  }
-                },
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FirebaseAnimatedList(
+                  key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
+                  scrollDirection: Axis.vertical,
+                  padding: const EdgeInsets.only(bottom: 20),
+                  query: databaseReference
+                      .child("HnHUcA6MT7WxdAz3pFCQWqkwOWj1")
+                      .child(_selectedDateTime.year.toString())
+                      .child(_selectedDateTime.month.toString()),
+                  sort: (DataSnapshot a, DataSnapshot b) =>
+                      b.key.compareTo(a.key),
+                  itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                      Animation<double> animation, int index) {
+                    if (snapshot.value != null) {
+                      Map<dynamic, dynamic> _data = snapshot.value;
+                      print(_data);
+                      return Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                Visibility(
+                                  visible: index == 0,
+                                  child: Icon(Icons.calendar_today),
+                                ),
+                                TextComponent(
+                                  text: DateFormatter.getDateAndTime(
+                                      _data["date_time"]),
+                                ),
+                              ],
+                            ),
+                            Flexible(
+                              child: SizedBox(
+                                width: SizeConfig.screenWidth / 3,
+                                child: Column(
+                                  children: [
+                                    Visibility(
+                                      visible: index == 0,
+                                      child: Icon(Icons.sensor_door),
+                                    ),
+                                    TextComponent(
+                                      text: _data["sensor_values"],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Flexible(
+                              child: SizedBox(
+                                width: SizeConfig.screenWidth / 3,
+                                child: Column(
+                                  children: [
+                                    Visibility(
+                                      visible: index == 0,
+                                      child: Icon(Icons.merge_type),
+                                    ),
+                                    TextComponent(
+                                      text: _data["sensor_type"],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
+                ),
               ),
             )
           ],
