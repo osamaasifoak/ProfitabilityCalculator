@@ -21,20 +21,16 @@ class StringConstant {
   static const String zertifikat = "Zertifikat";
 
   static const String schlusselfaktoren = "Schlüsselfaktoren";
-  static const String password = "Password";
+  // static const String password = "Password";
   static const String sensorValues = "Sensor values";
   static const String sensorType = "Sensor type";
   static const String confirmPassword = "Confirm password";
   static const String or = "Or";
-  static const String useOTP = "Use OTP";
-  static const String continueText = "Continue";
+  // static const String continueText = "Continue";
   static const String sensorVisualization = "Sensor Visualization";
-=======
-  static const String schlusselfaktoren = "Key Facts";
+
+  // static const String schlusselfaktoren = "Key Facts";
   static const String password = "Passwort ";
-  static const String confirmPassword = "Confirm password";
-  static const String or = "Or";
-  static const String useOTP = "Use OTP";
   static const String continueText = "Fortsetzen";
 
   static const String cart = "Cart";
