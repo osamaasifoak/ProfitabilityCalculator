@@ -260,7 +260,7 @@ class _InputScreenState extends State<InputScreen> {
             // dataProvider.calculateEnergyCosting();
             // dataProvider.totalCarbonDioxide();
             // dataProvider.totalKw();
-            // dataProvider.totalCosting(_altLosung);
+            dataProvider.calculateTotalYears();
             Navigator.pushNamed(context, RouteConstants.menuSelection);
             // } else {
             //   print("false");

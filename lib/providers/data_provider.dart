@@ -5,7 +5,7 @@ import 'package:lichtline/models/input_comparison_model.dart';
 
 class DataProvider extends ChangeNotifier {
   int _month = 12;
-  int _year = 12;
+  int _year = 0;
   double _electricityCostEuroKWH = 0.18;
   String companyName;
   DateTime _dateTime = new DateTime.now();
@@ -66,7 +66,7 @@ class DataProvider extends ChangeNotifier {
         }
       }
     }
-    print("Energy Costing: " + _totalEnergyCosting.toString());
+    // print("Energy Costing: " + _totalEnergyCosting.toString());
     return _totalEnergyCosting;
   }
 
@@ -120,7 +120,7 @@ class DataProvider extends ChangeNotifier {
         }
       }
     }
-    print(_totalCosting);
+    // print(_totalCosting);
   }
 
   totalCarbonDioxide(List<InputModel> _valuesForCalculation) {
@@ -129,7 +129,13 @@ class DataProvider extends ChangeNotifier {
     int _stuck = int.parse(_valuesForCalculation[2].value);
     int _watt = int.parse(_valuesForCalculation[3].value);
     int _maintenanceP = int.parse(_valuesForCalculation[5].value);
-    calculateMaintenanceCost(_maintenanceP.toDouble(), 12, 2);
+    int _totalNumberofHours = int.parse(_valuesForCalculation[6].value);
+    calculateMaintenanceCost(
+        _maintenanceP.toDouble(),
+        _year,
+        double.parse(calculateMaintenanceIncrementCycle(
+                _totalNumberofHours, _hours, _days)
+            .toString()));
     List<Sales> _totalCo2 = [];
     for (int i = 1; i <= _year; i++) {
       double tempCal =
@@ -142,7 +148,7 @@ class DataProvider extends ChangeNotifier {
       );
       // _totalCo2.add(tempCal);
     }
-    print("CO2: " + _totalCo2.toString());
+    // print("CO2: " + _totalCo2.toString());
     return _totalCo2;
   }
 
@@ -157,7 +163,7 @@ class DataProvider extends ChangeNotifier {
       double tempCal = (_hours * _days * _stuck * (_watt / 1000)) * i;
       _totalKw.add(Sales(i.toString(), tempCal));
     }
-    print("KW: " + _totalKw.toString());
+    // print("KW: " + _totalKw.toString());
     return _totalKw;
   }
 
@@ -165,17 +171,45 @@ class DataProvider extends ChangeNotifier {
       double maintenanceIncrementYearCycle) {
     int tempIncrement = 0;
     List<double> totalMaintenanceCost = [];
-    for (int i = 0; i < 12; i++) {
-      if (tempIncrement == maintenanceIncrementYearCycle) {
+    double incrementMaintenanceCost = maintenanceIncrementYearCycle;
+    double decrementMaintenanceCost = 0.0;
+
+    for (int i = 0; i < totalYears; i++) {
+      if (incrementMaintenanceCost.ceil() == tempIncrement) {
         totalMaintenanceCost.add(maintenanceCost);
-        tempIncrement = 0;
+        incrementMaintenanceCost =
+            incrementMaintenanceCost + maintenanceIncrementYearCycle;
       } else {
         tempIncrement++;
         totalMaintenanceCost.add(null);
       }
     }
 
+    // if (incrementMaintenanceCost == maintenanceIncrementYearCycle) {
+    //   totalMaintenanceCost.add(maintenanceCost);
+    //   tempIncrement = 0;
+    // } else {
+    //   incrementMaintenanceCost =
+    //       incrementMaintenanceCost + originalMaintenanceValue;
+    //   tempIncrement++;
+    //   totalMaintenanceCost.add(null);
+    // }
     print(totalMaintenanceCost);
+  }
+
+  calculateMaintenanceIncrementCycle(
+      int totalNumberOfHours, int numberOfGivenHours, int daysInYear) {
+    return (totalNumberOfHours / numberOfGivenHours / daysInYear);
+  }
+
+  calculateTotalYears() {
+    int numberOfGivenHours = int.parse(_lichtLine[0].value);
+    int totalNumberOfHours = int.parse(_lichtLine[6].value);
+    int daysInYear = int.parse(_lichtLine[1].value);
+    _year = calculateMaintenanceIncrementCycle(
+            totalNumberOfHours, numberOfGivenHours, daysInYear)
+        .ceil();
+    // print(_year);
   }
 
   // annualCostSaving(List<InputModel> _valuesForCalculation) {
