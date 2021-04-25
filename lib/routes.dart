@@ -7,6 +7,7 @@ import 'package:lichtline/screens/home/menu_selection_screen.dart';
 import 'package:lichtline/screens/input_readings/company_name_screen.dart';
 import 'package:lichtline/screens/input_readings/input_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:lichtline/screens/key_facts/key_facts_screen.dart';
 import 'package:lichtline/screens/pdf/pdf_screen.dart';
 import 'package:lichtline/screens/sensor_visualization/previous_record_screen.dart';
 import 'package:lichtline/screens/sensor_visualization/sensor_visualization_screen.dart';
@@ -59,6 +60,10 @@ onGenerateRoutes(RouteSettings settings) {
     case RouteConstants.pdfScreen:
       return MaterialPageRoute(
         builder: (_) => PdfScreen(),
+      );
+    case RouteConstants.keyFacts:
+      return MaterialPageRoute(
+        builder: (_) => KeyFactsScreen(),
       );
     case RouteConstants.sensorVisualizationScreen:
       return MaterialPageRoute(

@@ -28,6 +28,7 @@ class RouteConstants {
   static const String certificateScreen = 'certificateScreen';
   static const String companyNameScreen = 'companyNameScreen';
   static const String pdfScreen = 'pdfScreen';
+  static const String keyFacts = 'keyFacts';
   static const String sensorVisualizationScreen = 'sensorVisualizationScreen';
   static const String previousRecordScreen = 'previousRecordScreen';
 }

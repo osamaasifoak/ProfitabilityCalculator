@@ -36,94 +36,96 @@ class _CompanyNameScreenState extends State<CompanyNameScreen> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      body: Container(
-        width: SizeConfig.screenWidth,
-        height: SizeConfig.screenHeight,
-        child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                AppLogo(),
-                SizedBox(
-                  height: 40,
-                ),
-                TextComponent(
-                  text: StringConstant.companyNameScreenText,
-                  textStyle: FontStyles.inter(
-                      color: ColorConstant.black,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                TextInputComponent(
-                  title: StringConstant.companyName,
-                  controller: _companyNameController,
-                  fillColor: ColorConstant.white,
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    child: Icon(
-                      Icons.house,
-                      color: ColorConstant.black,
-                    ),
+      body: SingleChildScrollView(
+        child: Container(
+          width: SizeConfig.screenWidth,
+          height: SizeConfig.screenHeight,
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  AppLogo(),
+                  SizedBox(
+                    height: 40,
                   ),
-                  filled: true,
-                  validator: (value) {
-                    if (value == "") {
-                      return "Company name is required";
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(
-                  height: 24,
-                ),
-                ButtonComponent(
-                  onPressed: () => {
-                    if (_formKey.currentState.validate())
-                      {
-                        Provider.of<DataProvider>(context, listen: false)
-                            .setCompanyName(_companyNameController.text),
-                        Navigator.pushNamed(
-                            context, RouteConstants.inputScreen),
+                  TextComponent(
+                    text: StringConstant.companyNameScreenText,
+                    textStyle: FontStyles.inter(
+                        color: ColorConstant.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  TextInputComponent(
+                    title: StringConstant.companyName,
+                    controller: _companyNameController,
+                    fillColor: ColorConstant.white,
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      child: Icon(
+                        Icons.house,
+                        color: ColorConstant.black,
+                      ),
+                    ),
+                    filled: true,
+                    validator: (value) {
+                      if (value == "") {
+                        return "Company name is required";
                       }
-                  },
-                  buttonText: StringConstant.continueText,
-                  color: ColorConstant.black,
-                  border: 5,
-                  textStyle: FontStyles.inter(
-                      color: ColorConstant.white,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1.3,
-                      fontSize: 16.0),
-                ),
-                SizedBox(
-                  height: 24,
-                ),
-                ButtonComponent(
-                  onPressed: () => {
-                    Navigator.pushNamed(
-                        context, RouteConstants.sensorVisualizationScreen),
-                  },
-                  buttonText: StringConstant.sensorVisualization,
-                  color: ColorConstant.black,
-                  border: 5,
-                  textStyle: FontStyles.inter(
-                      color: ColorConstant.white,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1.3,
-                      fontSize: 16.0),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-              ],
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  ButtonComponent(
+                    onPressed: () => {
+                      if (_formKey.currentState.validate())
+                        {
+                          Provider.of<DataProvider>(context, listen: false)
+                              .setCompanyName(_companyNameController.text),
+                          Navigator.pushNamed(
+                              context, RouteConstants.inputScreen),
+                        }
+                    },
+                    buttonText: StringConstant.continueText,
+                    color: ColorConstant.black,
+                    border: 5,
+                    textStyle: FontStyles.inter(
+                        color: ColorConstant.white,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 1.3,
+                        fontSize: 16.0),
+                  ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  ButtonComponent(
+                    onPressed: () => {
+                      Navigator.pushNamed(
+                          context, RouteConstants.sensorVisualizationScreen),
+                    },
+                    buttonText: StringConstant.sensorVisualization,
+                    color: ColorConstant.black,
+                    border: 5,
+                    textStyle: FontStyles.inter(
+                        color: ColorConstant.white,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 1.3,
+                        fontSize: 16.0),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

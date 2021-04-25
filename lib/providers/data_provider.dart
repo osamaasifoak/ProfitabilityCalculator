@@ -87,6 +87,12 @@ class DataProvider extends ChangeNotifier {
     }
 
     var _totalEnergy = calculateEnergyCosting(_valuesForCalculation);
+    var _totalMaintenanceCost = calculateMaintenanceCost(
+        _maintenanceP.toDouble(),
+        _year,
+        double.parse(calculateMaintenanceIncrementCycle(
+                _totalHours, _userProvidedHours, _numberOfDays)
+            .toString()));
     for (var i = 0; i < _totalEnergy.length; i++) {
       if (i == 0) {
         if (isNewBulb) {
@@ -96,31 +102,17 @@ class DataProvider extends ChangeNotifier {
           _totalCosting.add(_totalEnergy[i]);
         }
       } else {
-        //TODO check
-        int remainder = i % _totalLife;
-        if (_totalLife == i) {
-          // if (_tempInt != _totalLife) {
-          // } else {
-          //   _totalLife = _totalLife + i - _tempInt;
-          // }
-
-          //  Sales(
-          //       (_dateTime.year + i).toString(),
-          //       double.parse(
-          //         _newValueForNextYear.toStringAsFixed(2),
-          //       )),
+        if (_totalMaintenanceCost[i] != null) {
           double _cost = _totalCosting[i - 1].sales + _totalEnergy[i].sales;
           double _maintenance = _stuck.toDouble() * _maintenanceP.toDouble();
           _totalCosting.add(Sales(i.toString(), _cost + _maintenance));
         } else {
-          // _totalCosting.add(_totalCosting[i - 1] + _totalEnergy[i]);
-
           _totalCosting.add(Sales(i.toString(),
               (_totalCosting[i - 1].sales + _totalEnergy[i].sales)));
         }
       }
     }
-    // print(_totalCosting);
+    print(_totalCosting);
   }
 
   totalCarbonDioxide(List<InputModel> _valuesForCalculation) {
@@ -172,8 +164,6 @@ class DataProvider extends ChangeNotifier {
     int tempIncrement = 0;
     List<double> totalMaintenanceCost = [];
     double incrementMaintenanceCost = maintenanceIncrementYearCycle;
-    double decrementMaintenanceCost = 0.0;
-
     for (int i = 0; i < totalYears; i++) {
       if (incrementMaintenanceCost.ceil() == tempIncrement) {
         totalMaintenanceCost.add(maintenanceCost);
@@ -184,17 +174,8 @@ class DataProvider extends ChangeNotifier {
         totalMaintenanceCost.add(null);
       }
     }
-
-    // if (incrementMaintenanceCost == maintenanceIncrementYearCycle) {
-    //   totalMaintenanceCost.add(maintenanceCost);
-    //   tempIncrement = 0;
-    // } else {
-    //   incrementMaintenanceCost =
-    //       incrementMaintenanceCost + originalMaintenanceValue;
-    //   tempIncrement++;
-    //   totalMaintenanceCost.add(null);
-    // }
     print(totalMaintenanceCost);
+    return totalMaintenanceCost;
   }
 
   calculateMaintenanceIncrementCycle(
@@ -209,7 +190,7 @@ class DataProvider extends ChangeNotifier {
     _year = calculateMaintenanceIncrementCycle(
             totalNumberOfHours, numberOfGivenHours, daysInYear)
         .ceil();
-    // print(_year);
+    print(_year);
   }
 
   // annualCostSaving(List<InputModel> _valuesForCalculation) {
