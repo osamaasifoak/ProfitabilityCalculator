@@ -24,6 +24,9 @@ class UmweltrechnerScreenState extends State<UmweltrechnerScreen> {
         id: 'lichtline',
         domainFn: (Sales sales, _) => sales.year,
         measureFn: (Sales sales, _) => sales.sales,
+        labelAccessorFn: (Sales sales, _) => sales.sales.toStringAsFixed(2),
+        // insideLabelStyleAccessorFn: ,
+
         data: data1,
         fillColorFn: (Sales sales, _) {
           return charts.MaterialPalette.black;
@@ -36,6 +39,7 @@ class UmweltrechnerScreenState extends State<UmweltrechnerScreen> {
         id: dataProvider.companyName,
         domainFn: (Sales sales, _) => sales.year,
         measureFn: (Sales sales, _) => sales.sales,
+        labelAccessorFn: (Sales sales, _) => sales.sales.toStringAsFixed(2),
         data: data2,
         fillColorFn: (Sales sales, _) {
           return charts.MaterialPalette.gray.shadeDefault;
@@ -52,6 +56,7 @@ class UmweltrechnerScreenState extends State<UmweltrechnerScreen> {
       _list,
       vertical: false,
       barGroupingType: charts.BarGroupingType.grouped,
+
       behaviors: [
         new charts.SeriesLegend(
           outsideJustification: charts.OutsideJustification.endDrawArea,
@@ -60,11 +65,48 @@ class UmweltrechnerScreenState extends State<UmweltrechnerScreen> {
           cellPadding: new EdgeInsets.only(right: 4.0, bottom: 2.0),
           entryTextStyle:
               charts.TextStyleSpec(fontFamily: 'Georgia', fontSize: 14),
-        )
+        ),
+        new charts.ChartTitle('Jahre',
+            behaviorPosition: charts.BehaviorPosition.start,
+            titleStyleSpec: charts.TextStyleSpec(fontSize: 11),
+            titleOutsideJustification:
+                charts.OutsideJustification.middleDrawArea),
+      ],
+      selectionModels: [
+        charts.SelectionModelConfig(
+            changedListener: (charts.SelectionModel model) {
+          if (model.hasDatumSelection) {
+            GroupStackedToolTipMgr.setTitle({
+              'title':
+                  '${model.selectedSeries[0].measureFn(model.selectedDatum[0].index)}',
+              'subTitle': '',
+              'itemCount': 3,
+              'repaintIndex': 1,
+            });
+          }
+        })
       ],
       defaultRenderer: charts.BarRendererConfig(
         symbolRenderer: new IconRenderer(Icons.circle),
+        barRendererDecorator: new charts.BarLabelDecorator(
+          // labelAnchor: charts.BarLabelAnchor.middle,
+          labelPosition: charts.BarLabelPosition.auto,
+          insideLabelStyleSpec: new charts.TextStyleSpec(
+            fontSize: 11,
+            color: charts.ColorUtil.fromDartColor(Colors.white),
+            // lineHeight: 0.14,
+            fontWeight: '700',
+          ),
+          outsideLabelStyleSpec: new charts.TextStyleSpec(
+            fontSize: 11,
+            color: charts.ColorUtil.fromDartColor(Color(0xff202020)),
+            // lineHeight: 0.14,
+            // fontWeight: '700',
+          ),
+        ),
       ),
+      // domainAxis:
+      // new charts.OrdinalAxisSpec(renderSpec: new charts.NoneRenderSpec()),
       domainAxis: charts.OrdinalAxisSpec(showAxisLine: true),
     );
   }
@@ -154,5 +196,41 @@ class IconRenderer extends charts.CustomSymbolRenderer {
     // }
     return new SizedBox.fromSize(
         size: size, child: new Icon(iconData, color: color, size: 14.0));
+  }
+}
+
+String _title;
+String _subTitle;
+int _itemCounter;
+int _repaintIndex;
+bool _flag;
+
+class GroupStackedToolTipMgr {
+  static String get title => _title;
+  static String get subTitle => _subTitle;
+  static int get itemCounter => _itemCounter;
+  static int get repaintIndex => _repaintIndex;
+  static bool get flag => _flag;
+  static set flag(_val) {
+    _flag = _val;
+  }
+
+  static setTitle(Map<String, dynamic> data) {
+    _flag = false;
+    if (data['title'] != null && data['title'].length > 0) {
+      _title = data['title'];
+    }
+
+    if (data['subTitle'] != null && data['subTitle'].length > 0) {
+      _subTitle = data['subTitle'];
+    }
+
+    if (data['itemCounter'] != null && data['itemCounter'] > 0) {
+      _itemCounter = data['itemCounter'];
+    }
+
+    if (data['repaintIndex'] != null) {
+      _repaintIndex = data['repaintIndex'];
+    }
   }
 }
