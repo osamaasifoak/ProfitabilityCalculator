@@ -18,13 +18,15 @@ class UmweltrechnerScreenState extends State<UmweltrechnerScreen> {
   List<charts.Series> seriesList1;
   List<charts.Series> seriesList2;
   DataProvider dataProvider;
-  List<charts.Series<Sales, String>> _createRandomData(data1, data2) {
+  List<charts.Series<Sales, String>> _createRandomData(
+      data1, data2, String unit) {
     return [
       charts.Series<Sales, String>(
         id: 'lichtline',
         domainFn: (Sales sales, _) => sales.year,
         measureFn: (Sales sales, _) => sales.sales,
-        labelAccessorFn: (Sales sales, _) => sales.sales.toStringAsFixed(2),
+        labelAccessorFn: (Sales sales, _) =>
+            sales.sales.toStringAsFixed(2) + unit,
         // insideLabelStyleAccessorFn: ,
 
         data: data1,
@@ -39,7 +41,8 @@ class UmweltrechnerScreenState extends State<UmweltrechnerScreen> {
         id: dataProvider.companyName,
         domainFn: (Sales sales, _) => sales.year,
         measureFn: (Sales sales, _) => sales.sales,
-        labelAccessorFn: (Sales sales, _) => sales.sales.toStringAsFixed(2),
+        labelAccessorFn: (Sales sales, _) =>
+            sales.sales.toStringAsFixed(2) + unit,
         data: data2,
         fillColorFn: (Sales sales, _) {
           return charts.MaterialPalette.gray.shadeDefault;
@@ -117,10 +120,12 @@ class UmweltrechnerScreenState extends State<UmweltrechnerScreen> {
     dataProvider = Provider.of<DataProvider>(context, listen: false);
     seriesList1 = _createRandomData(
         dataProvider.totalCarbonDioxide(dataProvider.lichtLine),
-        dataProvider.totalCarbonDioxide(dataProvider.altLosung));
+        dataProvider.totalCarbonDioxide(dataProvider.altLosung),
+        " t");
     seriesList2 = _createRandomData(
         dataProvider.totalKw(dataProvider.lichtLine),
-        dataProvider.totalKw(dataProvider.altLosung));
+        dataProvider.totalKw(dataProvider.altLosung),
+        " kWh");
   }
 
   @override

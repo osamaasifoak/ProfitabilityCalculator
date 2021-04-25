@@ -86,7 +86,7 @@ class DataProvider extends ChangeNotifier {
       newBulbInstallationCost = _price * _stuck;
     }
 
-    var _totalEnergy = calculateEnergyCosting(_valuesForCalculation);
+    List<Sales> _totalEnergy = calculateEnergyCosting(_valuesForCalculation);
     var _totalMaintenanceCost = calculateMaintenanceCost(
         _maintenanceP.toDouble(),
         _year,
@@ -96,8 +96,8 @@ class DataProvider extends ChangeNotifier {
     for (var i = 0; i < _totalEnergy.length; i++) {
       if (i == 0) {
         if (isNewBulb) {
-          _totalEnergy[i].sales = newBulbInstallationCost;
-          _totalCosting.add(_totalEnergy[i]);
+          // _totalEnergy[i].sales = newBulbInstallationCost;
+          _totalCosting.add(Sales("0", newBulbInstallationCost));
         } else {
           _totalCosting.add(_totalEnergy[i]);
         }
@@ -113,6 +113,7 @@ class DataProvider extends ChangeNotifier {
       }
     }
     print(_totalCosting);
+    return _totalCosting;
   }
 
   totalCarbonDioxide(List<InputModel> _valuesForCalculation) {
@@ -169,6 +170,7 @@ class DataProvider extends ChangeNotifier {
         totalMaintenanceCost.add(maintenanceCost);
         incrementMaintenanceCost =
             incrementMaintenanceCost + maintenanceIncrementYearCycle;
+        tempIncrement++;
       } else {
         tempIncrement++;
         totalMaintenanceCost.add(null);
@@ -201,6 +203,22 @@ class DataProvider extends ChangeNotifier {
   //   int _maintenanceP = int.parse(_valuesForCalculation[5].value);
   //   calculateMaintenanceCost(_maintenanceP.toDouble(), 12, 2);
   // }
+  calculationKumAmortisation() {
+    List<Sales> _lichtlineTotalCosting =
+        totalCosting(_lichtLine, isNewBulb: true);
+    List<Sales> _altLosungTotalCosting =
+        totalCosting(_altLosung, isNewBulb: true);
+    List<Sales> _kumAmortisation = [];
+    for (var i = 0; i < _lichtlineTotalCosting.length; i++) {
+      double temp = double.parse(
+          (_lichtlineTotalCosting[i].sales - _altLosungTotalCosting[i].sales)
+              .toStringAsFixed(2));
+      Sales _sales = new Sales(i.toString(), temp);
+      _kumAmortisation.add(_sales);
+    }
+    print(_kumAmortisation);
+    return _kumAmortisation;
+  }
 }
 
 class Sales {
