@@ -90,6 +90,7 @@ var btnList = [
     "route": RouteConstants.economicCalculator,
   },
   {"title": StringConstant.zertifikat, "route": RouteConstants.pdfScreen},
+  {"title": StringConstant.keyFacts, "route": RouteConstants.keyFacts},
   {
     "title": StringConstant.schlusselfaktoren,
     "route": RouteConstants.certificateScreen
