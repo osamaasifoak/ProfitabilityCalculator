@@ -259,7 +259,7 @@ class _InputScreenState extends State<InputScreen> {
             dataProvider.setInputValues(_lichtLine, _altLosung);
             dataProvider.calculateTotalYears();
             dataProvider.totalCosting(_altLosung);
-            dataProvider.totalCosting(_lichtLine, isNewBulb: true);
+            // dataProvider.totalCosting(_lichtLine, isNewBulb: true);
             // dataProvider.totalCarbonDioxide();
             // dataProvider.totalKw();
             Navigator.pushNamed(context, RouteConstants.menuSelection);

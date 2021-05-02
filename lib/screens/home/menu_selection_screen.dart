@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lichtline/components/app_logo_component.dart';
 import 'package:lichtline/components/text_component.dart';
+import 'package:lichtline/components/toast_component.dart';
 import 'package:lichtline/constants/colors/colors_constants.dart';
 import 'package:lichtline/constants/routes/routes_constants.dart';
 import 'package:lichtline/constants/strings/string_constants.dart';
@@ -44,10 +45,15 @@ class _MenuSelectionScreenState extends State<MenuSelectionScreen> {
                       // transitionOnUserGestures: true,
                       child: InkWell(
                         onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            btnList[index]["route"],
-                          );
+                          if (StringConstant.wirtschaftlichkeitsrechner ==
+                              btnList[index]["title"]) {
+                            ToastComponent.showToast("In progress");
+                          } else {
+                            Navigator.pushNamed(
+                              context,
+                              btnList[index]["route"],
+                            );
+                          }
                         },
                         child: Container(
                           decoration: new BoxDecoration(
@@ -91,8 +97,8 @@ var btnList = [
   },
   {"title": StringConstant.zertifikat, "route": RouteConstants.pdfScreen},
   {"title": StringConstant.keyFacts, "route": RouteConstants.keyFacts},
-  {
-    "title": StringConstant.schlusselfaktoren,
-    "route": RouteConstants.certificateScreen
-  },
+  // {
+  //   "title": StringConstant.schlusselfaktoren,
+  //   "route": RouteConstants.certificateScreen
+  // },
 ];

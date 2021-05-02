@@ -37,6 +37,7 @@ dependencies:
   firebase_storage: ^5.2.0
   firebase_core: ^0.5.3
   month_picker_dialog: ^0.3.3
+  fluttertoast: ^7.1.8
   # file_picker: ^2.1.6
 
 dev_dependencies:
