@@ -5,13 +5,15 @@ import 'package:lichtline/constants/assets/assets_constants.dart';
 import 'package:lichtline/constants/colors/colors_constants.dart';
 import 'package:lichtline/constants/strings/string_constants.dart';
 import 'package:lichtline/constants/styles/font_styles_constants.dart';
+import 'package:lichtline/providers/data_provider.dart';
 import 'package:lichtline/screens/pdf/pdf_preview_screen.dart';
-import 'package:lichtline/ui_utils/size_config.dart';
+import 'package:lichtline/utils/date_formatter_utils.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'dart:io';
 
 import 'package:pdf/widgets.dart' as pw;
+import 'package:provider/provider.dart';
 
 class PdfScreen extends StatefulWidget {
   @override
@@ -20,11 +22,13 @@ class PdfScreen extends StatefulWidget {
 
 class _PdfScreenState extends State<PdfScreen> {
   final pdf = pw.Document();
-  // @override
-  // void initState() {
-  //   SizeConfig().init(context);
-  //   super.initState();
-  // }
+  DataProvider dataProvider;
+
+  @override
+  void initState() {
+    dataProvider = Provider.of<DataProvider>(context, listen: false);
+    super.initState();
+  }
 
   writeOnPdf(BuildContext _context) {
     pdf.addPage(pw.MultiPage(
@@ -103,8 +107,10 @@ class _PdfScreenState extends State<PdfScreen> {
                 pw.SizedBox(
                   height: 20,
                 ),
-                _rowTitleAndText("0,00 t", "CO2-Äquivalente"),
-                _rowTitleAndText("268,37 kg", "Schwefeldioxid-Äquivalente"),
+                _rowTitleAndText(
+                    "${co2().replaceAll(".", ",")} t", "CO2-Äquivalente"),
+                _rowTitleAndText("${schwefeldioxid().replaceAll(".", ",")} kg",
+                    "Schwefeldioxid-Äquivalente"),
                 _rowTitleAndText("488,82 kg", "Stickstoffdioxid-Äquivalente"),
                 _rowTitleAndText("220,45 kg", "Kohlenmonoxid-Äquivalente"),
                 pw.SizedBox(
@@ -151,7 +157,7 @@ class _PdfScreenState extends State<PdfScreen> {
                       width: 150,
                       child: pw.Center(
                         child: pw.Text(
-                          "Bayreuth, den 16.10.2020",
+                          "Bayreuth, den ${DateFormatter.getDateDDMMYY(DateTime.now().toString())}",
                           textAlign: pw.TextAlign.center,
                           style: pw.TextStyle(
                               fontSize: 18,
@@ -251,6 +257,33 @@ class _PdfScreenState extends State<PdfScreen> {
 // //       await file.writeAsBytes(await pdf.save());
 // //     });
 //   }
+  String co2() {
+    List<Sales> lichtline =
+        dataProvider.totalCarbonDioxide(dataProvider.lichtLine);
+    List<Sales> oldBulb =
+        dataProvider.totalCarbonDioxide(dataProvider.altLosung);
+
+    return ((oldBulb[0].sales - lichtline[0].sales) * lichtline.length)
+        .toStringAsFixed(2);
+  }
+
+  String schwefeldioxid() {
+    List<Sales> lichtline = dataProvider.totalKw(dataProvider.lichtLine);
+    List<Sales> oldBulb = dataProvider.totalKw(dataProvider.altLosung);
+
+    return (((oldBulb[oldBulb.length - 1].sales -
+                    lichtline[lichtline.length - 1].sales) *
+                0.224) /
+            1000)
+        .toStringAsFixed(2);
+  }
+
+  anschaffungskosten() {
+    double initialCost = double.parse(dataProvider.lichtLine[4].value);
+    double stuck = double.parse(dataProvider.lichtLine[2].value);
+
+    return stuck * initialCost;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -325,8 +358,11 @@ class _PdfScreenState extends State<PdfScreen> {
               SizedBox(
                 height: 15,
               ),
-              titleAndTrailingText("0,00t", "CO2-Äquivalente"),
-              titleAndTrailingText("268,37 kg", "Schwefeldioxid-Äquivalente"),
+              titleAndTrailingText(
+                  "${co2().replaceAll(".", ",")} t", "CO2-Äquivalente"),
+              titleAndTrailingText(
+                  "${schwefeldioxid().replaceAll(".", ",")}  kg",
+                  "Schwefeldioxid-Äquivalente"),
               titleAndTrailingText("488,82 kg", "Stickstoffdioxid-Äquivalente"),
               titleAndTrailingText("220,45 kg", "Kohlenmonoxid-Äquivalente"),
               SizedBox(
@@ -377,7 +413,8 @@ class _PdfScreenState extends State<PdfScreen> {
                     SizedBox(
                       width: 150,
                       child: TextComponent(
-                        text: "Bayreuth, den",
+                        text:
+                            "Bayreuth, den ${DateFormatter.getDateDDMMYY(DateTime.now().toString())}",
                         textStyle: FontStyles.inter(
                             fontSize: 14,
                             color: ColorConstant.black,
