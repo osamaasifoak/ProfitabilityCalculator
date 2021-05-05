@@ -85,13 +85,24 @@ class _KeyFactsScreenState extends State<KeyFactsScreen> {
         .toStringAsFixed(2);
   }
 
-  co2() {
+  String co2() {
     List<Sales> lichtline =
         dataProvider.totalCarbonDioxide(dataProvider.lichtLine);
     List<Sales> oldBulb =
         dataProvider.totalCarbonDioxide(dataProvider.altLosung);
 
     return ((oldBulb[0].sales - lichtline[0].sales) * lichtline.length)
+        .toStringAsFixed(2);
+  }
+
+  schwefeldioxid() {
+    List<Sales> lichtline = dataProvider.totalKw(dataProvider.lichtLine);
+    List<Sales> oldBulb = dataProvider.totalKw(dataProvider.altLosung);
+
+    return (((oldBulb[oldBulb.length - 1].sales -
+                    lichtline[lichtline.length - 1].sales) *
+                0.224) /
+            1000)
         .toStringAsFixed(2);
   }
 
@@ -194,10 +205,10 @@ class _KeyFactsScreenState extends State<KeyFactsScreen> {
                       "${kostenerparnis()} €"),
                   _summarizeValues(context, "Amortisationsdauer", "asdasd"),
                   _summarizeValues(context, "Ø jährliche Rendite", "asdasd"),
-                  _summarizeValues(
-                      context, "Gesamte CO₂-Einsparung", "${co2()} t"),
-                  _summarizeValues(
-                      context, "Gesamte Schwefeldioxid-Einsparung", "asdasd"),
+                  _summarizeValues(context, "Gesamte CO₂-Einsparung",
+                      "${co2().replaceAll(".", ",")} t"),
+                  _summarizeValues(context, "Gesamte Schwefeldioxid-Einsparung",
+                      "${schwefeldioxid()} Kg"),
                 ],
               ),
             )
