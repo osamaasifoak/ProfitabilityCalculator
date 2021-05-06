@@ -8,6 +8,13 @@ class DateFormatter {
     return dateFormat;
   }
 
+  static String getDateDDMMYY(String _time) {
+    String dateFormat = DateFormat("dd.mm.yyyy").format(
+      DateTime.parse(_time),
+    );
+    return dateFormat;
+  }
+
   static String getWeekDay(String _time) {
     String dateFormat = DateFormat("EEEE").format(
       DateTime.parse(_time),
