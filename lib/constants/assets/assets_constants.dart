@@ -55,4 +55,7 @@ class AssetConstant {
   static const String signout_icon = "assets/signout-icon.svg";
   static const String navigation_forward = "assets/ios-forward.svg";
   static const String logo = "assets/logo.png";
+  static const String leafLicht = "assets/leaf-licht.png";
+  static const String tree = "assets/tree.png";
+  static const String lichtline = "assets/lichtline.png";
 }
