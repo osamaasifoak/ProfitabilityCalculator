@@ -80,8 +80,8 @@ class _KeyFactsScreenState extends State<KeyFactsScreen> {
     List<Sales> lichtline = dataProvider.totalCosting(dataProvider.lichtLine);
     List<Sales> oldBulb = dataProvider.totalCosting(dataProvider.altLosung);
 
-    return (lichtline[lichtline.length - 1].sales -
-            oldBulb[oldBulb.length - 1].sales)
+    return (oldBulb[oldBulb.length - 1].sales -
+            lichtline[lichtline.length - 1].sales)
         .toStringAsFixed(2);
   }
 
@@ -91,8 +91,8 @@ class _KeyFactsScreenState extends State<KeyFactsScreen> {
     List<Sales> oldBulb =
         dataProvider.totalCarbonDioxide(dataProvider.altLosung);
 
-    return (lichtline[lichtline.length - 1].sales -
-            oldBulb[oldBulb.length - 1].sales)
+    return (oldBulb[oldBulb.length - 1].sales -
+            lichtline[lichtline.length - 1].sales)
         .toStringAsFixed(2);
   }
 
@@ -189,9 +189,9 @@ class _KeyFactsScreenState extends State<KeyFactsScreen> {
                 children: [
                   _summarizeValues(context, "Anschaffungskosten",
                       "${anschaffungskosten()} €"),
-                  _summarizeValues(context, "Installationkosten",
+                  _summarizeValues(context, "Installationskosten",
                       "${getInstallationCost()} €"),
-                  _summarizeValues(context, "Kostnerparnis uber 14 Jahre",
+                  _summarizeValues(context, "Kostenersparnis über 10 Jahre",
                       "${kostenerparnis()} €"),
                   _summarizeValues(context, "Amortisationsdauer", "asdasd"),
                   _summarizeValues(context, "Ø jährliche Rendite", "asdasd"),
