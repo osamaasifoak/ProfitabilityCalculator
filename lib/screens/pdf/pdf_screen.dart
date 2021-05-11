@@ -175,7 +175,7 @@ class _PdfScreenState extends State<PdfScreen> {
                         ),
                       ),
                       child: pw.Text(
-                        "Maik Weber\n(Geschäftsführer lichtline)",
+                        "Matthias\n(Geschäftsführer lichtline)",
                         textAlign: pw.TextAlign.left,
                         style: pw.TextStyle(
                             fontSize: 18,
@@ -432,7 +432,7 @@ class _PdfScreenState extends State<PdfScreen> {
                         ),
                       ),
                       child: Text(
-                        "Maik Weber\n(Geschäftsführer lichtline)",
+                        "Matthias\n(Geschäftsführer lichtline)",
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             fontSize: 18,
