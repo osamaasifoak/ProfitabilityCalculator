@@ -135,7 +135,8 @@ class DataProvider extends ChangeNotifier {
           (_hours * _days * _stuck * (_watt / 10000) * (486 / 100000)) * i;
       _totalCo2.add(
         Sales(
-          (i - 1).toString(),
+          // (i - 1).toString(),
+          (i).toString(),
           tempCal,
         ),
       );
