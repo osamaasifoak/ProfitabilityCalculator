@@ -26,7 +26,7 @@ class UmweltrechnerScreenState extends State<UmweltrechnerScreen> {
         domainFn: (Sales sales, _) => sales.year,
         measureFn: (Sales sales, _) => sales.sales,
         labelAccessorFn: (Sales sales, _) =>
-            sales.sales.toStringAsFixed(2) + unit,
+            sales.sales.toStringAsFixed(2).replaceAll(".", ",") + unit,
         // insideLabelStyleAccessorFn: ,
 
         data: data1,
@@ -42,7 +42,7 @@ class UmweltrechnerScreenState extends State<UmweltrechnerScreen> {
         domainFn: (Sales sales, _) => sales.year,
         measureFn: (Sales sales, _) => sales.sales,
         labelAccessorFn: (Sales sales, _) =>
-            sales.sales.toStringAsFixed(2) + unit,
+            sales.sales.toStringAsFixed(2).replaceAll(".", ",") + unit,
         data: data2,
         fillColorFn: (Sales sales, _) {
           return charts.MaterialPalette.gray.shadeDefault;

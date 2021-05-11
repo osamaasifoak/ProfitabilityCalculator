@@ -90,9 +90,8 @@ class _KeyFactsScreenState extends State<KeyFactsScreen> {
         dataProvider.totalCarbonDioxide(dataProvider.lichtLine);
     List<Sales> oldBulb =
         dataProvider.totalCarbonDioxide(dataProvider.altLosung);
-
-    return ((oldBulb[0].sales - lichtline[0].sales) * lichtline.length)
-        .toStringAsFixed(2);
+    double subtractedValue = oldBulb[0].sales - lichtline[0].sales;
+    return (subtractedValue * lichtline.length).toStringAsFixed(2);
   }
 
   schwefeldioxid() {
