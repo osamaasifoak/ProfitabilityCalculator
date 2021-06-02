@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:lichtline/components/app_logo_component.dart';
@@ -7,9 +9,11 @@ import 'package:lichtline/components/popup_loader_component.dart';
 import 'package:lichtline/components/text_component.dart';
 import 'package:lichtline/components/toast_component.dart';
 import 'package:lichtline/constants/colors/colors_constants.dart';
+import 'package:lichtline/constants/strings/shared_preference_constants.dart';
 import 'package:lichtline/constants/strings/string_constants.dart';
 import 'package:lichtline/constants/styles/font_styles_constants.dart';
 import 'package:lichtline/providers/user_provider.dart';
+import 'package:lichtline/services/shared_preferences_service.dart';
 import 'package:lichtline/wrappers/user_wrapper.dart';
 import 'package:owesome_validator/owesome_validator.dart';
 import 'package:provider/provider.dart';
@@ -153,6 +157,9 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                             .child(_user.phone)
                             .set(_user.toJson());
                         _provider.userWrapper = _user;
+                        SharedPreferencesService().addStringInSF(
+                            SharedPreferenceConstants.user,
+                            json.encode(_user.toJson()));
                         PopupLoader.hideLoadingDialog(context);
                         Navigator.pushReplacementNamed(
                             context, widget.fromScreen);
