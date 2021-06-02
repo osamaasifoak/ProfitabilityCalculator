@@ -1,13 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:lichtline/components/app_logo_component.dart';
-import 'package:lichtline/constants/assets/assets_constants.dart';
 import 'package:lichtline/constants/colors/colors_constants.dart';
 import 'package:lichtline/constants/routes/routes_constants.dart';
+import 'package:lichtline/providers/user_provider.dart';
+import 'package:lichtline/services/shared_preferences_service.dart';
 import 'package:lichtline/ui_utils/size_config.dart';
+import 'package:lichtline/wrappers/user_wrapper.dart';
+import 'package:provider/provider.dart';
 
-import 'components/text_component.dart';
-import 'constants/strings/string_constants.dart';
-import 'constants/styles/font_styles_constants.dart';
+import 'constants/strings/shared_preference_constants.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -21,7 +24,18 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       Duration(seconds: 1),
       () {
-        Navigator.pushNamed(context, RouteConstants.login);
+        SharedPreferencesService()
+            .getStringInSF(SharedPreferenceConstants.user)
+            .then(
+              (value) => {
+                if (value != null)
+                  {
+                    Provider.of<UserProvider>(context, listen: false)
+                        .userWrapper = UserWrapper.fromRawJson(value)
+                  },
+                Navigator.pushNamed(context, RouteConstants.companyNameScreen)
+              },
+            );
       },
     );
   }
