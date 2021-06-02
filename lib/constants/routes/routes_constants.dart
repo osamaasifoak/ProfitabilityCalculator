@@ -31,4 +31,5 @@ class RouteConstants {
   static const String keyFacts = 'keyFacts';
   static const String sensorVisualizationScreen = 'sensorVisualizationScreen';
   static const String previousRecordScreen = 'previousRecordScreen';
+  static const String userInfoScreen = 'userInfoScreen';
 }

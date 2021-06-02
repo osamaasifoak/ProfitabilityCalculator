@@ -6,7 +6,9 @@ import 'package:lichtline/constants/colors/colors_constants.dart';
 import 'package:lichtline/constants/routes/routes_constants.dart';
 import 'package:lichtline/constants/strings/string_constants.dart';
 import 'package:lichtline/constants/styles/font_styles_constants.dart';
+import 'package:lichtline/providers/user_provider.dart';
 import 'package:lichtline/ui_utils/size_config.dart';
+import 'package:provider/provider.dart';
 
 class MenuSelectionScreen extends StatefulWidget {
   @override
@@ -48,6 +50,21 @@ class _MenuSelectionScreenState extends State<MenuSelectionScreen> {
                           if (StringConstant.wirtschaftlichkeitsrechner ==
                               btnList[index]["title"]) {
                             ToastComponent.showToast("In progress");
+                          } else if (StringConstant.keyFacts ==
+                              btnList[index]["title"]) {
+                            var user = Provider.of<UserProvider>(context,
+                                    listen: false)
+                                .userWrapper;
+                            if (user != null) {
+                              Navigator.pushNamed(
+                                context,
+                                btnList[index]["route"],
+                              );
+                            } else {
+                              Navigator.pushNamed(
+                                  context, RouteConstants.userInfoScreen,
+                                  arguments: btnList[index]["route"]);
+                            }
                           } else {
                             Navigator.pushNamed(
                               context,

@@ -97,17 +97,17 @@ class DataProvider extends ChangeNotifier {
       if (i == 0) {
         if (isNewBulb) {
           // _totalEnergy[i].sales = newBulbInstallationCost;
-          _totalCosting.add(Sales("0", newBulbInstallationCost));
+          _totalCosting.add(Sales("1", newBulbInstallationCost));
         } else {
-          _totalCosting.add(_totalEnergy[i]);
+          _totalCosting.add(Sales("1", _totalEnergy[i].sales));
         }
       } else {
         if (_totalMaintenanceCost[i] != null) {
           double _cost = _totalCosting[i - 1].sales + _totalEnergy[i].sales;
           double _maintenance = _stuck.toDouble() * _maintenanceP.toDouble();
-          _totalCosting.add(Sales(i.toString(), _cost + _maintenance));
+          _totalCosting.add(Sales((i + 1).toString(), _cost + _maintenance));
         } else {
-          _totalCosting.add(Sales(i.toString(),
+          _totalCosting.add(Sales((i + 1).toString(),
               (_totalCosting[i - 1].sales + _totalEnergy[i].sales)));
         }
       }

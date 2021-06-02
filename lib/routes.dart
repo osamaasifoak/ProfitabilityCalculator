@@ -4,6 +4,7 @@ import 'package:lichtline/screens/certificate/certificate_screen.dart';
 import 'package:lichtline/screens/economic_calculator/economic_calculator_screen.dart';
 import 'package:lichtline/screens/home/bottom_bar_screen.dart';
 import 'package:lichtline/screens/home/menu_selection_screen.dart';
+import 'package:lichtline/screens/home/user_info_screen.dart';
 import 'package:lichtline/screens/input_readings/company_name_screen.dart';
 import 'package:lichtline/screens/input_readings/input_screen.dart';
 import 'package:flutter/material.dart';
@@ -72,6 +73,12 @@ onGenerateRoutes(RouteSettings settings) {
     case RouteConstants.previousRecordScreen:
       return MaterialPageRoute(
         builder: (_) => PreviousRecordScreen(),
+      );
+    case RouteConstants.userInfoScreen:
+      return MaterialPageRoute(
+        builder: (_) => UserInfoScreen(
+          fromScreen: settings.arguments,
+        ),
       );
     default:
   }

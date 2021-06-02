@@ -2,7 +2,6 @@ import 'package:lichtline/constants/assets/assets_constants.dart';
 import 'package:lichtline/constants/colors/colors_constants.dart';
 import 'package:lichtline/constants/strings/string_constants.dart';
 import 'package:lichtline/screens/auth/login_screen.dart';
-import 'package:lichtline/screens/profile/profile_menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -15,7 +14,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
     LoginScreen(),
-    ProfileMenuScreen(),
+    LoginScreen(),
   ];
 
   void _onItemTapped(int index) {
