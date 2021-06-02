@@ -80,6 +80,7 @@ class StringConstant {
   static const String signOut = "Signout";
   static const String dateAndTime = "Date & Time";
   static const String submit = "Submit";
+  static const String userInformation = "User Information";
   static const String companyNameScreenText =
       "-	Mit unserem Wirtschaftlichkeitsrechner können Sie einfach, schnell und unkompliziert Ihre neue Beleuchtungslösung berechnen. Wir stehen Ihnen für Fragen jederzeit zur Verfügung!";
 }

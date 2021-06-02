@@ -60,7 +60,7 @@ class _KeyFactsScreenState extends State<KeyFactsScreen> {
     dataProvider = Provider.of<DataProvider>(context, listen: false);
     _amortisation = dataProvider.calculationKumAmortisation();
     seriesList1 = _createRandomData(
-        dataProvider.totalCosting(dataProvider.lichtLine),
+        dataProvider.totalCosting(dataProvider.lichtLine, isNewBulb: true),
         dataProvider.totalCosting(dataProvider.altLosung),
         " t");
     super.initState();
@@ -127,6 +127,7 @@ class _KeyFactsScreenState extends State<KeyFactsScreen> {
           entryTextStyle:
               charts.TextStyleSpec(fontFamily: 'Georgia', fontSize: 14),
         ),
+
         // new charts.ChartTitle('Jahre',
         //     behaviorPosition: charts.BehaviorPosition.start,
         //     titleStyleSpec: charts.TextStyleSpec(fontSize: 11),
@@ -149,6 +150,7 @@ class _KeyFactsScreenState extends State<KeyFactsScreen> {
       //   })
       // ],
       defaultRenderer: charts.LineRendererConfig(
+        includeArea: true, stacked: true,
         symbolRenderer: new IconRenderer(Icons.circle),
         //   barRendererDecorator: new charts.BarLabelDecorator(
         //     // labelAnchor: charts.BarLabelAnchor.middle,
@@ -167,11 +169,71 @@ class _KeyFactsScreenState extends State<KeyFactsScreen> {
         //     ),
         //   ),
       ),
-      // domainAxis:
-      // new charts.OrdinalAxisSpec(renderSpec: new charts.NoneRenderSpec()),
+      // domainAxis: new charts.NumericAxisSpec(
+      //     viewport: new charts.NumericExtents(2, 14)),
       // domainAxis: charts.OrdinalAxisSpec(showAxisLine: true),
     );
   }
+  // barChart(_list) {
+  //   return new charts.LineChart(
+  //     _list,
+  //     // vertical: false,
+  //     // barGroupingType: charts.BarGroupingType.grouped,
+
+  //     behaviors: [
+  //       new charts.SeriesLegend(
+  //         outsideJustification: charts.OutsideJustification.endDrawArea,
+  //         horizontalFirst: false,
+  //         desiredMaxRows: 2,
+  //         cellPadding: new EdgeInsets.only(right: 4.0, bottom: 2.0),
+  //         entryTextStyle:
+  //             charts.TextStyleSpec(fontFamily: 'Georgia', fontSize: 14),
+  //       ),
+  //       // new charts.ChartTitle('Jahre',
+  //       //     behaviorPosition: charts.BehaviorPosition.start,
+  //       //     titleStyleSpec: charts.TextStyleSpec(fontSize: 11),
+  //       //     titleOutsideJustification:
+  //       //         charts.OutsideJustification.startDrawArea),
+  //     ],
+
+  //     // selectionModels: [
+  //     //   charts.SelectionModelConfig(
+  //     //       changedListener: (charts.SelectionModel model) {
+  //     //     if (model.hasDatumSelection) {
+  //     //       // GroupStackedToolTipMgr.setTitle({
+  //     //       //   'title':
+  //     //       //       '${model.selectedSeries[0].measureFn(model.selectedDatum[0].index)}',
+  //     //       //   'subTitle': '',
+  //     //       //   'itemCount': 3,
+  //     //       //   'repaintIndex': 1,
+  //     //       // });
+  //     //     }
+  //     //   })
+  //     // ],
+  //     defaultRenderer: charts.LineRendererConfig(
+  //       symbolRenderer: new IconRenderer(Icons.circle),
+  //       //   barRendererDecorator: new charts.BarLabelDecorator(
+  //       //     // labelAnchor: charts.BarLabelAnchor.middle,
+  //       //     labelPosition: charts.BarLabelPosition.auto,
+  //       //     insideLabelStyleSpec: new charts.TextStyleSpec(
+  //       //       fontSize: 11,
+  //       //       color: charts.ColorUtil.fromDartColor(Colors.white),
+  //       //       // lineHeight: 0.14,
+  //       //       fontWeight: '700',
+  //       //     ),
+  //       //     outsideLabelStyleSpec: new charts.TextStyleSpec(
+  //       //       fontSize: 11,
+  //       //       color: charts.ColorUtil.fromDartColor(Color(0xff202020)),
+  //       //       // lineHeight: 0.14,
+  //       //       // fontWeight: '700',
+  //       //     ),
+  //       //   ),
+  //     ),
+  //     // domainAxis:
+  //     // new charts.OrdinalAxisSpec(renderSpec: new charts.NoneRenderSpec()),
+  //     // domainAxis: charts.OrdinalAxisSpec(showAxisLine: true),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
