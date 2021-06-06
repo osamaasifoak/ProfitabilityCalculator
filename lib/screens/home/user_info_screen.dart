@@ -12,6 +12,7 @@ import 'package:lichtline/constants/colors/colors_constants.dart';
 import 'package:lichtline/constants/strings/shared_preference_constants.dart';
 import 'package:lichtline/constants/strings/string_constants.dart';
 import 'package:lichtline/constants/styles/font_styles_constants.dart';
+import 'package:lichtline/providers/data_provider.dart';
 import 'package:lichtline/providers/user_provider.dart';
 import 'package:lichtline/services/shared_preferences_service.dart';
 import 'package:lichtline/wrappers/user_wrapper.dart';
@@ -144,6 +145,8 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 ButtonComponent(
                   onPressed: () async {
                     if (formKey.currentState.validate()) {
+                      var dataProvider =
+                          Provider.of<DataProvider>(context, listen: false);
                       PopupLoader.showLoadingDialog(context);
                       UserProvider _provider =
                           Provider.of<UserProvider>(context, listen: false);
@@ -152,11 +155,20 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                           phone: _phone.text,
                           name: _username.text);
                       try {
+                        Map<String, dynamic> data = {};
+                        dataProvider.altLosung
+                            .forEach((x) => data[x.fieldName] = x.value);
                         await databaseReference
                             .child("Users")
                             .child(_user.phone)
                             .set(_user.toJson());
+
                         _provider.userWrapper = _user;
+                        await databaseReference
+                            .child("Users_Entries")
+                            .child(_user.phone)
+                            .push()
+                            .set(data);
                         SharedPreferencesService().addStringInSF(
                             SharedPreferenceConstants.user,
                             json.encode(_user.toJson()));

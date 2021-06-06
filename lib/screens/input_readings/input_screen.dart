@@ -1,11 +1,15 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:lichtline/components/input_component.dart';
+import 'package:lichtline/components/popup_loader_component.dart';
 import 'package:lichtline/components/text_component.dart';
+import 'package:lichtline/components/toast_component.dart';
 import 'package:lichtline/constants/colors/colors_constants.dart';
 import 'package:lichtline/constants/routes/routes_constants.dart';
 import 'package:lichtline/constants/strings/string_constants.dart';
 import 'package:lichtline/constants/styles/font_styles_constants.dart';
 import 'package:lichtline/models/input_comparison_model.dart';
 import 'package:lichtline/providers/data_provider.dart';
+import 'package:lichtline/providers/user_provider.dart';
 import 'package:lichtline/ui_utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +23,8 @@ class _InputScreenState extends State<InputScreen> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   List<InputModel> _lichtLine = new List<InputModel>();
   List<InputModel> _altLosung = new List<InputModel>();
+  final databaseReference = FirebaseDatabase.instance.reference();
+
   DataProvider _dataProvider;
   @override
   void initState() {
@@ -252,8 +258,26 @@ class _InputScreenState extends State<InputScreen> {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: ColorConstant.black,
         elevation: 10,
-        onPressed: () {
+        onPressed: () async {
           if (_formKey.currentState.validate()) {
+            UserProvider _user =
+                Provider.of<UserProvider>(context, listen: false);
+            Map<String, dynamic> data = {};
+            _altLosung.forEach((x) => data[x.fieldName] = x.value);
+            if (_user.userWrapper != null) {
+              PopupLoader.showLoadingDialog(context);
+              try {
+                await databaseReference
+                    .child("Users_Entries")
+                    .child(_user.userWrapper.phone)
+                    .push()
+                    .set(data);
+                PopupLoader.hideLoadingDialog(context);
+              } catch (e) {
+                PopupLoader.hideLoadingDialog(context);
+                ToastComponent.showToast("Unable to send data to server");
+              }
+            }
             var dataProvider =
                 Provider.of<DataProvider>(context, listen: false);
             dataProvider.setInputValues(_lichtLine, _altLosung);
