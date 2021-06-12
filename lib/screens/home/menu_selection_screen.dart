@@ -61,9 +61,8 @@ class _MenuSelectionScreenState extends State<MenuSelectionScreen> {
                                 btnList[index]["route"],
                               );
                             } else {
-                              Navigator.pushNamed(
-                                  context, RouteConstants.userInfoScreen,
-                                  arguments: btnList[index]["route"]);
+                              _showUserConfirmationDialog(
+                                  btnList[index]["route"]);
                             }
                           } else {
                             Navigator.pushNamed(
@@ -99,6 +98,41 @@ class _MenuSelectionScreenState extends State<MenuSelectionScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  _showUserConfirmationDialog(String routeArgument) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false, // user must tap button for close dialog!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Hello',
+            style: TextStyle(color: Colors.white),
+          ),
+          content: const Text(
+            'We need your some information to send you a final results.',
+            style: TextStyle(color: Colors.white),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            FlatButton(
+              child: const Text('Ok'),
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, RouteConstants.userInfoScreen,
+                    arguments: routeArgument);
+              },
+            )
+          ],
+        );
+      },
     );
   }
 }

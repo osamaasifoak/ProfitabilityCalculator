@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class ColorConstant {
-  //TRUCKIT
   static const whiteBody = const Color(0xffF5F5F5);
   static const white = const Color(0xffffffff);
   static const black = const Color(0xff000000);
