@@ -32,12 +32,14 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
   TextEditingController _username;
   TextEditingController _email;
   TextEditingController _phone;
+  UserWrapper user;
   final databaseReference = FirebaseDatabase.instance.reference();
   @override
   void initState() {
-    _username = new TextEditingController();
-    _email = new TextEditingController();
-    _phone = new TextEditingController();
+    user = Provider.of<UserProvider>(context, listen: false).userWrapper;
+    _username = new TextEditingController(text: user.name);
+    _email = new TextEditingController(text: user.email);
+    _phone = new TextEditingController(text: user.phone);
     formKey = GlobalKey<FormState>();
     super.initState();
   }
@@ -122,6 +124,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 TextInputComponent(
                   title: StringConstant.phoneNumber,
                   controller: _phone,
+                  keyboardType: TextInputType.phone,
                   fillColor: ColorConstant.white,
                   prefixIcon: Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
@@ -133,7 +136,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                   filled: true,
                   validator: (value) {
                     if (!OwesomeValidator.phone(
-                        value, OwesomeValidator.patternPhone)) {
+                        value, r'^\+(?:[0-9]●?){6,14}[0-9]$')) {
                       return "Invalid phone number";
                     }
                     return null;
@@ -156,25 +159,33 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                           name: _username.text);
                       try {
                         Map<String, dynamic> data = {};
-                        dataProvider.altLosung
-                            .forEach((x) => data[x.fieldName] = x.value);
+
                         await databaseReference
                             .child("Users")
                             .child(_user.phone)
                             .set(_user.toJson());
-
                         _provider.userWrapper = _user;
-                        await databaseReference
-                            .child("Users_Entries")
-                            .child(_user.phone)
-                            .push()
-                            .set(data);
+                        if (widget.fromScreen != 'homeMenu') {
+                          dataProvider.altLosung
+                              .forEach((x) => data[x.fieldName] = x.value);
+                          await databaseReference
+                              .child("Users_Entries")
+                              .child(_user.phone)
+                              .push()
+                              .set(data);
+                        }
                         SharedPreferencesService().addStringInSF(
                             SharedPreferenceConstants.user,
                             json.encode(_user.toJson()));
                         PopupLoader.hideLoadingDialog(context);
-                        Navigator.pushReplacementNamed(
-                            context, widget.fromScreen);
+                        if (widget.fromScreen != 'homeMenu') {
+                          Navigator.pushReplacementNamed(
+                              context, widget.fromScreen);
+                        } else {
+                          Navigator.pop(context);
+                          ToastComponent.showToast(
+                              "User information updated successfully");
+                        }
                       } catch (e) {
                         PopupLoader.hideLoadingDialog(context);
                         ToastComponent.showToast("Something went wrong");
@@ -186,7 +197,9 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                       //     context, RouteConstants.inputScreen),
                     }
                   },
-                  buttonText: StringConstant.continueText,
+                  buttonText: widget.fromScreen == 'homeMenu'
+                      ? "Save"
+                      : StringConstant.continueText,
                   color: ColorConstant.black,
                   border: 5,
                   textStyle: FontStyles.inter(
