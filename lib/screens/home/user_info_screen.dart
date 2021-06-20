@@ -37,9 +37,9 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
   @override
   void initState() {
     user = Provider.of<UserProvider>(context, listen: false).userWrapper;
-    _username = new TextEditingController(text: user.name);
-    _email = new TextEditingController(text: user.email);
-    _phone = new TextEditingController(text: user.phone);
+    _username = new TextEditingController(text: user != null ? user.name : "");
+    _email = new TextEditingController(text: user != null ? user.email : "");
+    _phone = new TextEditingController(text: user != null ? user.phone : "");
     formKey = GlobalKey<FormState>();
     super.initState();
   }

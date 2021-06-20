@@ -117,7 +117,6 @@ class _KeyFactsScreenState extends State<KeyFactsScreen> {
       _list,
       // vertical: false,
       // barGroupingType: charts.BarGroupingType.grouped,
-
       behaviors: [
         new charts.SeriesLegend(
           outsideJustification: charts.OutsideJustification.endDrawArea,
@@ -127,28 +126,7 @@ class _KeyFactsScreenState extends State<KeyFactsScreen> {
           entryTextStyle:
               charts.TextStyleSpec(fontFamily: 'Georgia', fontSize: 14),
         ),
-
-        // new charts.ChartTitle('Jahre',
-        //     behaviorPosition: charts.BehaviorPosition.start,
-        //     titleStyleSpec: charts.TextStyleSpec(fontSize: 11),
-        //     titleOutsideJustification:
-        //         charts.OutsideJustification.startDrawArea),
       ],
-
-      // selectionModels: [
-      //   charts.SelectionModelConfig(
-      //       changedListener: (charts.SelectionModel model) {
-      //     if (model.hasDatumSelection) {
-      //       // GroupStackedToolTipMgr.setTitle({
-      //       //   'title':
-      //       //       '${model.selectedSeries[0].measureFn(model.selectedDatum[0].index)}',
-      //       //   'subTitle': '',
-      //       //   'itemCount': 3,
-      //       //   'repaintIndex': 1,
-      //       // });
-      //     }
-      //   })
-      // ],
       defaultRenderer: charts.LineRendererConfig(
         includeArea: true, stacked: true,
         symbolRenderer: new IconRenderer(Icons.circle),
@@ -169,8 +147,18 @@ class _KeyFactsScreenState extends State<KeyFactsScreen> {
         //     ),
         //   ),
       ),
-      // domainAxis: new charts.NumericAxisSpec(
-      //     viewport: new charts.NumericExtents(2, 14)),
+      domainAxis: new charts.NumericAxisSpec(
+        // viewport: new charts.NumericExtents(1, 11)
+        tickProviderSpec: new charts.BasicNumericTickProviderSpec(
+          zeroBound: false,
+          dataIsInWholeNumbers: false,
+          desiredTickCount: 12,
+        ),
+        renderSpec: charts.GridlineRendererSpec(
+            tickLengthPx: 0,
+            labelOffsetFromAxisPx: 12,
+          )   
+      ),
       // domainAxis: charts.OrdinalAxisSpec(showAxisLine: true),
     );
   }

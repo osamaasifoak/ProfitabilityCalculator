@@ -12,6 +12,8 @@ import 'package:lichtline/ui_utils/size_config.dart';
 import 'package:lichtline/wrappers/user_wrapper.dart';
 import 'package:provider/provider.dart';
 
+import '../../constants/colors/colors_constants.dart';
+
 class MenuSelectionScreen extends StatefulWidget {
   @override
   _MenuSelectionScreenState createState() => _MenuSelectionScreenState();
@@ -156,12 +158,14 @@ class _MenuSelectionScreenState extends State<MenuSelectionScreen> {
           actions: <Widget>[
             FlatButton(
               child: const Text('Cancel'),
+              color: ColorConstant.white,
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
             FlatButton(
               child: const Text('Ok'),
+              color: ColorConstant.white,
               onPressed: () {
                 Navigator.pop(context);
                 Navigator.pushNamed(context, RouteConstants.userInfoScreen,

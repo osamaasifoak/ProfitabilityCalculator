@@ -13,7 +13,7 @@ class ColorConstant {
   static const emerald = const Color(0xff00a553);
   static const red = const Color(0xffff1100);
   static MaterialColor kPrimaryColor = const MaterialColor(
-    0xff128488,
+    0xff000000,
     const <int, Color>{
       50: const Color(0xff000000),
       100: const Color(0xff000000),
