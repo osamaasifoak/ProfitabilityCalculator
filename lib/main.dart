@@ -1,13 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:lichtline/animation.dart';
 import 'package:lichtline/constants/colors/colors_constants.dart';
 import 'package:lichtline/provider_initialize_list.dart';
 import 'package:lichtline/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:lichtline/screens/pdf/pdf_screen.dart';
 import 'package:lichtline/splash_screen.dart';
 import 'package:provider/provider.dart';
-
 import 'splash_screen.dart';
 
 Future<void> main() async {

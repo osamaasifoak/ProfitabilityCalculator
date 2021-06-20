@@ -7,8 +7,12 @@ import 'package:lichtline/constants/routes/routes_constants.dart';
 import 'package:lichtline/constants/strings/string_constants.dart';
 import 'package:lichtline/constants/styles/font_styles_constants.dart';
 import 'package:lichtline/providers/user_provider.dart';
+import 'package:lichtline/screens/home/user_info_screen.dart';
 import 'package:lichtline/ui_utils/size_config.dart';
+import 'package:lichtline/wrappers/user_wrapper.dart';
 import 'package:provider/provider.dart';
+
+import '../../constants/colors/colors_constants.dart';
 
 class MenuSelectionScreen extends StatefulWidget {
   @override
@@ -16,11 +20,46 @@ class MenuSelectionScreen extends StatefulWidget {
 }
 
 class _MenuSelectionScreenState extends State<MenuSelectionScreen> {
+  UserWrapper user;
+  @override
+  void initState() {
+    user = Provider.of<UserProvider>(context, listen: false).userWrapper;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     // var dataProvider = Provider.of<DataProvider>(context, listen: false);
     SizeConfig().init(context);
     return Scaffold(
+      appBar: AppBar(
+        leading: SizedBox(),
+        actions: [
+          Visibility(
+            visible: user != null,
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UserInfoScreen(
+                      fromScreen: "homeMenu",
+                    ),
+                  ),
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.person,
+                  color: ColorConstant.white,
+                ),
+              ),
+            ),
+          )
+        ],
+        backgroundColor: ColorConstant.black,
+      ),
       body: Container(
         width: SizeConfig.screenWidth,
         height: SizeConfig.screenHeight,
@@ -31,6 +70,7 @@ class _MenuSelectionScreenState extends State<MenuSelectionScreen> {
             children: [
               Spacer(),
               AppLogo(),
+              SizedBox(height: 20),
               Expanded(
                 flex: 3,
                 child: GridView.builder(
@@ -118,12 +158,14 @@ class _MenuSelectionScreenState extends State<MenuSelectionScreen> {
           actions: <Widget>[
             FlatButton(
               child: const Text('Cancel'),
+              color: ColorConstant.white,
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
             FlatButton(
               child: const Text('Ok'),
+              color: ColorConstant.white,
               onPressed: () {
                 Navigator.pop(context);
                 Navigator.pushNamed(context, RouteConstants.userInfoScreen,
