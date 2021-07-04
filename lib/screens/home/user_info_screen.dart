@@ -122,7 +122,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                   height: 10,
                 ),
                 TextInputComponent(
-                  title: StringConstant.phoneNumber,
+                  title: "Ex: +xx xxxx xxxx xxx",//StringConstant.phoneNumber,
                   controller: _phone,
                   keyboardType: TextInputType.phone,
                   fillColor: ColorConstant.white,
@@ -148,48 +148,48 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 ButtonComponent(
                   onPressed: () async {
                     if (formKey.currentState.validate()) {
-                      var dataProvider =
-                          Provider.of<DataProvider>(context, listen: false);
-                      PopupLoader.showLoadingDialog(context);
-                      UserProvider _provider =
-                          Provider.of<UserProvider>(context, listen: false);
-                      UserWrapper _user = UserWrapper(
-                          email: _email.text,
-                          phone: _phone.text,
-                          name: _username.text);
-                      try {
-                        Map<String, dynamic> data = {};
+                      // var dataProvider =
+                      //     Provider.of<DataProvider>(context, listen: false);
+                      // PopupLoader.showLoadingDialog(context);
+                      // UserProvider _provider =
+                      //     Provider.of<UserProvider>(context, listen: false);
+                      // UserWrapper _user = UserWrapper(
+                      //     email: _email.text,
+                      //     phone: _phone.text,
+                      //     name: _username.text);
+                      // try {
+                      //   Map<String, dynamic> data = {};
 
-                        await databaseReference
-                            .child("Users")
-                            .child(_user.phone)
-                            .set(_user.toJson());
-                        _provider.userWrapper = _user;
-                        if (widget.fromScreen != 'homeMenu') {
-                          dataProvider.altLosung
-                              .forEach((x) => data[x.fieldName] = x.value);
-                          await databaseReference
-                              .child("Users_Entries")
-                              .child(_user.phone)
-                              .push()
-                              .set(data);
-                        }
-                        SharedPreferencesService().addStringInSF(
-                            SharedPreferenceConstants.user,
-                            json.encode(_user.toJson()));
-                        PopupLoader.hideLoadingDialog(context);
-                        if (widget.fromScreen != 'homeMenu') {
-                          Navigator.pushReplacementNamed(
-                              context, widget.fromScreen);
-                        } else {
-                          Navigator.pop(context);
-                          ToastComponent.showToast(
-                              "User information updated successfully");
-                        }
-                      } catch (e) {
-                        PopupLoader.hideLoadingDialog(context);
-                        ToastComponent.showToast("Something went wrong");
-                      }
+                      //   await databaseReference
+                      //       .child("Users")
+                      //       .child(_user.phone)
+                      //       .set(_user.toJson());
+                      //   _provider.userWrapper = _user;
+                      //   if (widget.fromScreen != 'homeMenu') {
+                      //     dataProvider.altLosung
+                      //         .forEach((x) => data[x.fieldName] = x.value);
+                      //     await databaseReference
+                      //         .child("Users_Entries")
+                      //         .child(_user.phone)
+                      //         .push()
+                      //         .set(data);
+                      //   }
+                      //   SharedPreferencesService().addStringInSF(
+                      //       SharedPreferenceConstants.user,
+                      //       json.encode(_user.toJson()));
+                      //   PopupLoader.hideLoadingDialog(context);
+                      //   if (widget.fromScreen != 'homeMenu') {
+                      //     Navigator.pushReplacementNamed(
+                      //         context, widget.fromScreen);
+                      //   } else {
+                      //     Navigator.pop(context);
+                      //     ToastComponent.showToast(
+                      //         "User information updated successfully");
+                      //   }
+                      // } catch (e) {
+                      //   PopupLoader.hideLoadingDialog(context);
+                      //   ToastComponent.showToast("Something went wrong");
+                      // }
 
                       // Provider.of<UserProvider>(context, listen: false)
                       //     .setCompanyName(_companyNameController.text),
