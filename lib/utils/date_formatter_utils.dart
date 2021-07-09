@@ -9,7 +9,7 @@ class DateFormatter {
   }
 
   static String getDateDDMMYY(String _time) {
-    String dateFormat = DateFormat("dd.mm.yyyy").format(
+    String dateFormat = DateFormat("dd.MMMM.yyyy").format(
       DateTime.parse(_time),
     );
     return dateFormat;

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:lichtline/components/app_logo_component.dart';
 import 'package:lichtline/components/buttons/button_component.dart';
 import 'package:lichtline/components/input_component.dart';
@@ -121,27 +122,60 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 SizedBox(
                   height: 10,
                 ),
-                TextInputComponent(
-                  title: StringConstant.phoneNumber,
-                  controller: _phone,
-                  keyboardType: TextInputType.phone,
-                  fillColor: ColorConstant.white,
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    child: Icon(
-                      Icons.phone,
-                      color: ColorConstant.black,
-                    ),
+                InternationalPhoneNumberInput(
+                  // hintText: "Ex: xxxx xxxx xxx",
+                  onInputChanged: (PhoneNumber number) {
+                    print(number.phoneNumber);
+                  },
+                  onInputValidated: (bool value) {
+                    print(value);
+                  },
+                  selectorConfig: SelectorConfig(
+                    selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
                   ),
-                  filled: true,
-                  validator: (value) {
-                    if (!OwesomeValidator.phone(
-                        value, r'^\+(?:[0-9]●?){6,14}[0-9]$')) {
-                      return "Invalid phone number";
-                    }
-                    return null;
+                  ignoreBlank: false,
+                  // validator: (value) {
+                  //   if (!OwesomeValidator.phone(
+                  //       _phone.text, r'^\+(?:[0-9]●?){6,14}[0-9]$')) {
+                  //     return "Invalid phone number";
+                  //   }
+                  //   return null;
+                  // },
+                  autoValidateMode: AutovalidateMode.disabled,
+                  selectorTextStyle: TextStyle(color: Colors.black),
+                  // initialValue: number,
+                  textFieldController: _phone,
+                  formatInput: false,
+                  textStyle:
+                      FontStyles.inter(color: ColorConstant.greyishBrownTwo),
+                  keyboardType: TextInputType.numberWithOptions(
+                      signed: true, decimal: true),
+                  inputBorder: OutlineInputBorder(),
+                  onSaved: (PhoneNumber number) {
+                    print('On Saved: $number');
                   },
                 ),
+                // TextInputComponent(
+                //   title: "Ex: +xx xxxx xxxx xxx",//StringConstant.phoneNumber,
+                //   controller: _phone,
+                //   keyboardType: TextInputType.phone,
+                //   fillColor: ColorConstant.white,
+                //   prefixIcon: Padding(
+                //     padding: const EdgeInsets.only(top: 10, bottom: 10),
+                //     child: Icon(
+                //       Icons.phone,
+                //       color: ColorConstant.black,
+                //     ),
+                //   ),
+                //   filled: true,
+                //   validator: (value) {
+                //     if (!OwesomeValidator.phone(
+                //         value, r'^\+(?:[0-9]●?){6,14}[0-9]$')) {
+                //       return "Invalid phone number";
+                //     }
+                //     return null;
+                //   },
+                // ),
                 SizedBox(
                   height: 24,
                 ),

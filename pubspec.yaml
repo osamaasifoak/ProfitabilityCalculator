@@ -39,6 +39,7 @@ dependencies:
   month_picker_dialog: ^0.3.3
   fluttertoast: ^7.1.8
   owesome_validator: ^0.0.5
+  intl_phone_number_input: ^0.6.0
   # file_picker: ^2.1.6
 
 dev_dependencies:
