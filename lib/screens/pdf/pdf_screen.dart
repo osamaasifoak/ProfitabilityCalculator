@@ -31,166 +31,174 @@ class _PdfScreenState extends State<PdfScreen> {
   }
 
   writeOnPdf(BuildContext _context) {
-    pdf.addPage(pw.MultiPage(
-      pageFormat: PdfPageFormat.a4,
-      margin: pw.EdgeInsets.only(left: 32, right: 32),
-      build: (pw.Context context) {
-        return <pw.Widget>[
-          pw.Container(
-            height: MediaQuery.of(_context).size.height,
-            child: pw.Column(
-              crossAxisAlignment: pw.CrossAxisAlignment.center,
-              mainAxisAlignment: pw.MainAxisAlignment.center,
-              children: [
-                pw.Container(
-                  height: 200,
-                  width: 200,
-                  decoration: new pw.BoxDecoration(
-                    shape: pw.BoxShape.circle,
-                    color: PdfColors.green,
-                    // boxShadow: [
-                    //   pw.BoxShadow(color: PdfColors.black., blurRadius: 2)
-                    // ],
+    pdf.addPage(
+      pw.MultiPage(
+        pageFormat: PdfPageFormat.a4,
+        maxPages: 1,
+        margin: pw.EdgeInsets.only(left: 32, right: 32),
+        build: (pw.Context context) {
+          return <pw.Widget>[
+            pw.Container(
+              // height: MediaQuery.of(_context).size.height,
+              child: pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.center,
+                mainAxisAlignment: pw.MainAxisAlignment.center,
+                children: [
+                  pw.SizedBox(
+                    height: 30,
                   ),
-                  child: pw.Column(
-                    crossAxisAlignment: pw.CrossAxisAlignment.center,
-                    mainAxisAlignment: pw.MainAxisAlignment.center,
-                    children: [
-                      pw.Text(
-                        "UMWELT",
-                        style: pw.TextStyle(
-                            fontSize: 25,
-                            color: PdfColors.white,
-                            fontWeight: pw.FontWeight.bold),
-                      ),
-                      pw.Text(
-                        "ZERTIFIKAT",
-                        style: pw.TextStyle(
-                            fontSize: 25,
-                            color: PdfColors.white,
-                            fontWeight: pw.FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-                pw.SizedBox(
-                  height: 20,
-                ),
-                pw.Text(
-                  "Die Firma lichtline bestätigt der",
-                  style: pw.TextStyle(
-                      fontSize: 20,
-                      color: PdfColors.black,
-                      fontWeight: pw.FontWeight.bold),
-                ),
-                pw.SizedBox(
-                  height: 20,
-                ),
-                pw.Text(
-                  "Rehau AG + Co",
-                  style: pw.TextStyle(
-                      fontSize: 45,
-                      color: PdfColors.black,
-                      fontWeight: pw.FontWeight.bold),
-                ),
-                pw.SizedBox(
-                  height: 20,
-                ),
-                pw.Text(
-                  "durch die Umrüstung auf lichtline-Beleuchtung überden gesamten Nutzungszeitraum folgende Einsparungen:",
-                  textAlign: pw.TextAlign.center,
-                  style: pw.TextStyle(
-                      fontSize: 18,
-                      color: PdfColors.black,
-                      fontWeight: pw.FontWeight.bold),
-                ),
-                pw.SizedBox(
-                  height: 20,
-                ),
-                _rowTitleAndText(
-                    "${co2().replaceAll(".", ",")} t", "CO2-Äquivalente"),
-                _rowTitleAndText("${schwefeldioxid().replaceAll(".", ",")} kg",
-                    "Schwefeldioxid-Äquivalente"),
-                _rowTitleAndText("488,82 kg", "Stickstoffdioxid-Äquivalente"),
-                _rowTitleAndText("220,45 kg", "Kohlenmonoxid-Äquivalente"),
-                pw.SizedBox(
-                  height: 20,
-                ),
-                pw.Text(
-                  "Die dabei jährlich eingesparten Treibhausemissionen entsprechen der Menge, die",
-                  textAlign: pw.TextAlign.center,
-                  style: pw.TextStyle(
-                      fontSize: 18,
-                      color: PdfColors.black,
-                      fontWeight: pw.FontWeight.bold),
-                ),
-                pw.SizedBox(
-                  height: 20,
-                ),
-                pw.Text(
-                  "5.612 Bäume",
-                  textAlign: pw.TextAlign.left,
-                  style: pw.TextStyle(
-                      fontSize: 18,
-                      color: PdfColors.black,
-                      fontWeight: pw.FontWeight.bold),
-                ),
-                pw.SizedBox(
-                  height: 20,
-                ),
-                pw.Text(
-                  "pro Jahr binden können.",
-                  textAlign: pw.TextAlign.center,
-                  style: pw.TextStyle(
-                      fontSize: 18,
-                      color: PdfColors.black,
-                      fontWeight: pw.FontWeight.bold),
-                ),
-                pw.SizedBox(
-                  height: 40,
-                ),
-                pw.Row(
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
-                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                  children: [
-                    pw.SizedBox(
-                      width: 150,
-                      child: pw.Center(
-                        child: pw.Text(
-                          "Bayreuth, den ${DateFormatter.getDateDDMMYY(DateTime.now().toString())}",
-                          textAlign: pw.TextAlign.center,
-                          style: pw.TextStyle(
-                              fontSize: 18,
-                              color: PdfColors.black,
-                              fontWeight: pw.FontWeight.normal),
-                        ),
-                      ),
+                  pw.Container(
+                    height: 200,
+                    width: 200,
+                    decoration: new pw.BoxDecoration(
+                      shape: pw.BoxShape.circle,
+                      color: PdfColors.green,
+                      // boxShadow: [
+                      //   pw.BoxShadow(color: PdfColors.black., blurRadius: 2)
+                      // ],
                     ),
-                    pw.SizedBox(width: 10, height: 30),
-                    pw.Container(
-                      width: 120,
-                      decoration: new pw.BoxDecoration(
-                        border: pw.Border(
-                          top: pw.BorderSide(width: 1, color: PdfColors.black),
+                    child: pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.center,
+                      mainAxisAlignment: pw.MainAxisAlignment.center,
+                      children: [
+                        pw.Text(
+                          "UMWELT",
+                          style: pw.TextStyle(
+                              fontSize: 25,
+                              color: PdfColors.white,
+                              fontWeight: pw.FontWeight.bold),
+                        ),
+                        pw.Text(
+                          "ZERTIFIKAT",
+                          style: pw.TextStyle(
+                              fontSize: 25,
+                              color: PdfColors.white,
+                              fontWeight: pw.FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                  pw.SizedBox(
+                    height: 20,
+                  ),
+                  pw.Text(
+                    "Die Firma lichtline bestätigt der",
+                    style: pw.TextStyle(
+                        fontSize: 20,
+                        color: PdfColors.black,
+                        fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 20,
+                  ),
+                  pw.Text(
+                    "Rehau AG + Co",
+                    style: pw.TextStyle(
+                        fontSize: 45,
+                        color: PdfColors.black,
+                        fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 20,
+                  ),
+                  pw.Text(
+                    "durch die Umrüstung auf lichtline-Beleuchtung überden gesamten Nutzungszeitraum folgende Einsparungen:",
+                    textAlign: pw.TextAlign.center,
+                    style: pw.TextStyle(
+                        fontSize: 18,
+                        color: PdfColors.black,
+                        fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 20,
+                  ),
+                  _rowTitleAndText(
+                      "${co2().replaceAll(".", ",")} t", "CO2-Äquivalente"),
+                  _rowTitleAndText(
+                      "${schwefeldioxid().replaceAll(".", ",")} kg",
+                      "Schwefeldioxid-Äquivalente"),
+                  _rowTitleAndText("488,82 kg", "Stickstoffdioxid-Äquivalente"),
+                  _rowTitleAndText("220,45 kg", "Kohlenmonoxid-Äquivalente"),
+                  pw.SizedBox(
+                    height: 20,
+                  ),
+                  pw.Text(
+                    "Die dabei jährlich eingesparten Treibhausemissionen entsprechen der Menge, die",
+                    textAlign: pw.TextAlign.center,
+                    style: pw.TextStyle(
+                        fontSize: 18,
+                        color: PdfColors.black,
+                        fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 20,
+                  ),
+                  pw.Text(
+                    "5.612 Bäume",
+                    textAlign: pw.TextAlign.left,
+                    style: pw.TextStyle(
+                        fontSize: 18,
+                        color: PdfColors.black,
+                        fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 20,
+                  ),
+                  pw.Text(
+                    "pro Jahr binden können.",
+                    textAlign: pw.TextAlign.center,
+                    style: pw.TextStyle(
+                        fontSize: 18,
+                        color: PdfColors.black,
+                        fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 20,
+                  ),
+                  pw.Row(
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                    children: [
+                      pw.SizedBox(
+                        width: 150,
+                        child: pw.Center(
+                          child: pw.Text(
+                            "Bayreuth, den ${DateFormatter.getDateDDMMYY(DateTime.now().toString())}",
+                            textAlign: pw.TextAlign.center,
+                            style: pw.TextStyle(
+                                fontSize: 18,
+                                color: PdfColors.black,
+                                fontWeight: pw.FontWeight.normal),
+                          ),
                         ),
                       ),
-                      child: pw.Text(
-                        "Maik Weber\n(Geschäftsführer lichtline)",
-                        textAlign: pw.TextAlign.left,
-                        style: pw.TextStyle(
-                            fontSize: 18,
-                            color: PdfColors.black,
-                            fontWeight: pw.FontWeight.bold),
-                      ),
-                    )
-                  ],
-                )
-              ],
+                      pw.SizedBox(width: 10, height: 30),
+                      pw.Container(
+                        width: 120,
+                        decoration: new pw.BoxDecoration(
+                          border: pw.Border(
+                            top:
+                                pw.BorderSide(width: 1, color: PdfColors.black),
+                          ),
+                        ),
+                        child: pw.Text(
+                          "Matthias\n(Geschäftsführer lichtline)",
+                          textAlign: pw.TextAlign.left,
+                          style: pw.TextStyle(
+                              fontSize: 12,
+                              color: PdfColors.black,
+                              fontWeight: pw.FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
-          ),
-        ];
-      },
-    ));
+          ];
+        },
+      ),
+    );
   }
 
   pw.Row _rowTitleAndText(String value, String text) {
@@ -228,14 +236,13 @@ class _PdfScreenState extends State<PdfScreen> {
     );
   }
 
-  Future savePdf() async {
+  Future<String> savePdf() async {
     Directory documentDirectory = await getApplicationDocumentsDirectory();
-
     String documentPath = documentDirectory.path;
-
-    File file = File("$documentPath/example.pdf");
+    File file = File("$documentPath/${DateTime.now()}-LichtLine.pdf");
 
     file.writeAsBytesSync(await pdf.save());
+    return file.path;
   }
 //   Future<void> saveFile() async {
 //     final pdf = pw.Document();
@@ -469,21 +476,19 @@ class _PdfScreenState extends State<PdfScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           writeOnPdf(context);
-          await savePdf();
-
-          Directory documentDirectory =
-              await getApplicationDocumentsDirectory();
-
-          String documentPath = documentDirectory.path;
-
-          String fullPath = "$documentPath/example.pdf";
-
+          String path = await savePdf();
+          // Directory documentDirectory =
+          //     await getLibraryDirectory();
+          // String documentPath = documentDirectory.path;
+          // String fullPath = "$documentPath/${DateTime.now()}-LichtLine.pdf";
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => PdfPreviewScreen(
-                        path: fullPath,
-                      )));
+            context,
+            MaterialPageRoute(
+              builder: (context) => PdfPreviewScreen(
+                path: path,
+              ),
+            ),
+          );
         },
         child: Icon(Icons.save),
       ), // This trailing comma makes auto-formatting nicer for build methods.

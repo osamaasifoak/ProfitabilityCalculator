@@ -50,6 +50,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Container(
           height: _height,
@@ -59,8 +60,10 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
             key: formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                 SizedBox(
+                  height: 40,
+                ),
                 AppLogo(),
                 SizedBox(
                   height: 40,
