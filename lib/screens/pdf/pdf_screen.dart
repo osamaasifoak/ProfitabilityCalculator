@@ -439,7 +439,7 @@ class _PdfScreenState extends State<PdfScreen> {
                         ),
                       ),
                       child: Text(
-                        "Maik Weber\n(Geschäftsführer lichtline)",
+                        "Matthias\n(Geschäftsführer lichtline)",
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             fontSize: 18,
